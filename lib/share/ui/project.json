@@ -1,0 +1,52 @@
+{
+  "name": "ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "lib/share/ui/src",
+  "prefix": "contler",
+  "tags": ["share"],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "lib/share/ui/ng-package.json",
+        "tailwindConfig": "lib/share/ui/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "lib/share/ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "lib/share/ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "lib/share/ui/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "lib/share/ui/**/*.ts",
+          "lib/share/ui/**/*.html",
+          "lib/share/ui/package.json"
+        ]
+      }
+    }
+  }
+}
