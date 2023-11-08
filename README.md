@@ -84,10 +84,60 @@ When working within the Contler project, follow these best practices:
 
 ## Contributing
 
-We welcome contributions to the Contler project. Before contributing, please read our contribution guidelines, which provide detailed instructions on how to make a contribution.
+Contributions are vital to the success and evolution of the Contler project, and your willingness to contribute is greatly appreciated. Please adhere to our contribution guidelines which incorporate the GitHub Flow to ensure a smooth and consistent workflow.
 
-For more information about Nx, visit the [Nx Documentation](https://nx.dev).
+### Using GitHub Flow
 
-Enjoy building with Contler!
+When contributing to the project, we follow the GitHub Flow. It is a simple yet effective branching strategy suited for projects that deploy regularly. Here's the step-by-step guide:
+
+1. **Create a Branch**:
+  - Branch off from the `main` branch and use a descriptive name that reflects the changes you intend to make. Here are some branch naming conventions:
+    - `feature/<feature-name>` for new features
+    - `fixbug/<bug-description>` for bug fixes
+    - `hotfix/<hotfix-description>` for critical fixes
+    - `docs/update-<section>` for documentation updates
+    - `improve/<improvement-description>` for general improvements
+
+2. **Make Changes**:
+  - Commit your changes with clear, descriptive commit messages.
+  - Push your branch to the remote repository.
+
+
+3. **Open a Pull Request (PR)**:
+- Once your branch has been pushed, open a pull request against the `main` branch.
+- Request reviews from team members and engage in any necessary discussions.
+
+4. **Code Review and Collaboration**:
+- Make any changes based on feedback, committing and pushing as necessary.
+- Your pull request will update automatically with each push.
+
+5. **Deploy**:
+- If possible, test your branch in a live environment to ensure everything works as expected.
+
+6. **Merge and Close**:
+- After your pull request is approved and tests pass, merge it into `main`.
+- Delete the feature branch if no longer needed and pull the changes into your local `main` branch.
+
+### Branch Naming Conventions
+
+Please use the following naming patterns for your branches:
+- `feature/<short-feature-description>` for new features
+- `fixbug/<short-bug-description>` for bug fixes
+- `hotfix/<short-hotfix-description>` for critical fixes
+- `docs/<short-doc-update-description>` for documentation updates
+- `improve/<short-improvement-description>` for improvements
+- `refactor/<short-refactor-description>` for code refactoring
+- `test/<short-test-description>` for testing
+- `misc/<short-task-description>` for miscellaneous tasks
+
+These conventions are crucial for maintaining a clear and organized repository.
+
+For more detailed information on GitHub Flow, refer to the [GitHub Flow Guide](https://guides.github.com/introduction/flow/).
+
+We're excited to see the contributions you'll make to Contler! If you have any questions or need help, don't hesitate to ask the project maintainers.
+
+Thank you for your dedication to improving Contler!
+
+For further details about Nx, visit the [Nx Documentation](https://nx.dev).
 
 
