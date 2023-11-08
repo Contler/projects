@@ -1,1 +1,6 @@
-<p>button works!</p>
+<div>
+  <ng-container *ngIf="!load">
+    <ng-content></ng-content>
+  </ng-container>
+  <mat-spinner ctrSpinnerHotel diameter="30" *ngIf="load"></mat-spinner>
+</div>

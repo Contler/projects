@@ -54,7 +54,8 @@
         "port": 4400,
         "configDir": "libs/share/ui/.storybook",
         "browserTarget": "ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["libs/share/styles/main.scss", "libs/share/styles/material.scss"]
       },
       "configurations": {
         "ci": {

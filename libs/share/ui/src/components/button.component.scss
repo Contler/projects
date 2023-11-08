@@ -1,0 +1,17 @@
+:host {
+  @apply bg-ctr text-white flex justify-center items-center;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+
+  &:disabled {
+    @apply bg-gray-200 text-white;
+  }
+}
+
+// .spinner {
+//   --mdc-circular-progress-active-indicator-color: white;
+// }
+

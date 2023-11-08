@@ -7,8 +7,21 @@ const meta: Meta<ButtonComponent> = {
   title: 'ButtonComponent',
 };
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+interface StoryButtonProps {
+  label: string;
+  disabled: boolean;
+}
+
+type Story = StoryObj<ButtonComponent & StoryButtonProps>;
 
 export const Primary: Story = {
-  args: {},
+  render: (props) => ({
+    props,
+    template: `<button [load]="load" ctrBbutton [disabled]="disabled" >{{ label }}</button>`,
+  }),
+  args: {
+    label: 'primary button',
+    disabled: false,
+    load: false,
+  },
 };
