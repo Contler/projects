@@ -68,9 +68,7 @@ The `share` library includes shared resources across applications.
 
 - **Tailwind Preset:** Includes a TailwindCSS preset that ensures a consistent design system across the different apps within the Contler project.
 
-- **UI Components:** Houses reusable UI components that can be shared across multiple applications to ensure a consistent look and feel.
-
-- **Directives:** Contains Angular directives (if using Angular) that provide additional behavior to templates across your applications.
+- **UI Components:** Houses reusable UI components that can be shared across multiple applications to ensure a consistent look and feel. For information on how to use the UI components, see the [UI Components README](libs/share/ui/README.md).
 
 ## Development Practices
 
