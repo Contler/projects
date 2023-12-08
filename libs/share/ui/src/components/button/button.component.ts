@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angula
 import { MatRippleModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { SpinnerHotelDirective } from '../directives/spinner-hotel.directive';
+import { SpinnerHotelDirective } from '../../directives/spinner-hotel.directive';
 
 /**
  * Component for a custom button with loading state.
