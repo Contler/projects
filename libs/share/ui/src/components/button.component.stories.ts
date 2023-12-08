@@ -17,7 +17,7 @@ type Story = StoryObj<ButtonComponent & StoryButtonProps>;
 export const Primary: Story = {
   render: (props) => ({
     props,
-    template: `<button [load]="load" ctrBbutton [disabled]="disabled" >{{ label }}</button>`,
+    template: `<button [load]="load" ctrButton [disabled]="disabled" >{{ label }}</button>`,
   }),
   args: {
     label: 'primary button',

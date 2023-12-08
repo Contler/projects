@@ -1,6 +1,6 @@
-<div>
-  <ng-container *ngIf="!load">
+<div class="btn-content" matRipple matRippleColor="rgba(255, 255, 255, 0.2)" [matRippleDisabled]="load">
+  <span [style.opacity]="load ? 0 : 1">
     <ng-content></ng-content>
-  </ng-container>
-  <mat-spinner ctrSpinnerHotel diameter="30" *ngIf="load"></mat-spinner>
+  </span>
+  <mat-spinner *ngIf="load" class="spinner" ctrSpinnerHotel diameter="30"></mat-spinner>
 </div>
