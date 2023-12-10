@@ -4,7 +4,7 @@ import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
-  title: 'ButtonComponent',
+  title: 'Buttons',
 };
 export default meta;
 interface StoryButtonProps {
@@ -14,7 +14,7 @@ interface StoryButtonProps {
 
 type Story = StoryObj<ButtonComponent & StoryButtonProps>;
 
-export const Primary: Story = {
+export const SimpleButton: Story = {
   render: (props) => ({
     props,
     template: `<button [load]="load" ctrButton [disabled]="disabled" >{{ label }}</button>`,

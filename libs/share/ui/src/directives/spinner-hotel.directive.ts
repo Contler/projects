@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, HostBinding } from '@angular/core';
+import { ChangeDetectorRef, Directive, HostBinding, Input } from '@angular/core';
 
 /**
  * A directive that adds custom styling to a Material Design spinner element
@@ -12,7 +12,7 @@ export class SpinnerHotelDirective {
   /**
    * The color of the spinner's active indicator.
    */
-  @HostBinding('style.--mdc-circular-progress-active-indicator-color') color = '#fff';
+  @Input() @HostBinding('style.--mdc-circular-progress-active-indicator-color') colorSpinner = '#fff';
 
   constructor(private cdr: ChangeDetectorRef) {}
 }

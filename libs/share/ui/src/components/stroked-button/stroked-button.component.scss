@@ -1,0 +1,22 @@
+:host {
+  @apply bg-white flex justify-center items-center border border-ctr text-ctr;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 12px;
+
+  &:disabled {
+    @apply border-gray-200 text-gray-200;
+  }
+}
+
+.btn-content {
+  @apply flex justify-center items-center w-full h-full;
+  position: relative;
+  padding: 14px 16px;
+  border-radius: 12px;
+}
+
+.spinner {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
