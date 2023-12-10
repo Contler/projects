@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatRippleModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SpinnerHotelDirective } from '@contler/ui';
+
+import { SpinnerHotelDirective } from '../../directives/spinner-hotel.directive';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
