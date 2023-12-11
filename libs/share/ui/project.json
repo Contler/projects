@@ -32,10 +32,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/share/ui/**/*.ts", "libs/share/ui/**/*.html", "libs/share/ui/package.json"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
