@@ -1,14 +1,14 @@
 {
-  "name": "admin-e2e",
+  "name": "guest-restaurant-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/admin-e2e/src",
+  "sourceRoot": "apps/guest-restaurant-e2e/src",
   "targets": {
     "e2e": {
       "executor": "@nx/playwright:playwright",
-      "outputs": ["{workspaceRoot}/dist/.playwright/apps/admin-e2e"],
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/guest-restaurant-e2e"],
       "options": {
-        "config": "apps/admin-e2e/playwright.config.ts"
+        "config": "apps/guest-restaurant-e2e/playwright.config.ts"
       }
     },
     "lint": {
@@ -16,5 +16,5 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "implicitDependencies": ["admin"]
+  "implicitDependencies": ["guest-restaurant"]
 }

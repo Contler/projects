@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "contler-dev"
+  },
+  "targets": {
+    "contler-dev": {
+      "hosting": {
+        "guest-restaurant": [
+          "guest-restaurant"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

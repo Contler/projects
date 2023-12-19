@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "guest-restaurant",
+      "public": "dist/apps/guest-restaurant/browser",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "!**/*.@(js|json|css|jpg|jpeg|gif|png|svg)",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

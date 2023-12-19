@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@contler/configState": ["libs/share/config-state/src/index.ts"],
       "@contler/ui": ["libs/share/ui/src/index.ts"]
     }
   },

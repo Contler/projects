@@ -1,0 +1,53 @@
+{
+  "name": "guest-proxy",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/guest-proxy/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/guest-proxy",
+        "main": "apps/guest-proxy/src/main.ts",
+        "tsConfig": "apps/guest-proxy/tsconfig.app.json",
+        "assets": ["apps/guest-proxy/src/assets"],
+        "webpackConfig": "apps/guest-proxy/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "guest-proxy:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "guest-proxy:build:development"
+        },
+        "production": {
+          "buildTarget": "guest-proxy:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/guest-proxy/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
