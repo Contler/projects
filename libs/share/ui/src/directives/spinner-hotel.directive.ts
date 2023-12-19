@@ -12,7 +12,7 @@ export class SpinnerHotelDirective {
   /**
    * The color of the spinner's active indicator.
    */
-  @Input() @HostBinding('style.--mdc-circular-progress-active-indicator-color') colorSpinner = '#fff';
+  @Input() @HostBinding('style.--mdc-circular-progress-active-indicator-color') colorSpinner = '#171717';
 
   constructor(private cdr: ChangeDetectorRef) {}
 }
