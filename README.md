@@ -75,6 +75,16 @@ The `share` library includes shared resources across applications.
 
 - **UI Components:** Houses reusable UI components that can be shared across multiple applications to ensure a consistent look and feel. For information on how to use the UI components, see the [UI Components README](libs/share/ui/README.md).
 
+### Utils
+
+The `utils` library includes utility functions that can be used across applications. 
+
+Inside utils is [auth-http-handle.service.ts](libs%2Futils%2Fsrc%2Fservices%2Fauth-http-handle.service.ts) which is a service that handles the http requests and responses. It adds the token to the request headers.
+
+### Core
+
+The `core` library includes features libraries that resolve business logic.
+
 ## Development Practices
 
 When working within the Contler project, follow these best practices:
@@ -122,6 +132,14 @@ When contributing to the project, we follow the GitHub Flow. It is a simple yet 
 6. **Merge and Close**:
 - After your pull request is approved and tests pass, merge it into `main`.
 - Delete the feature branch if no longer needed and pull the changes into your local `main` branch.
+
+### Commit Message Conventions
+
+Contler use conventionalcommits for commit messages. 
+This leads to more readable messages that are easy to follow when looking through the project history. 
+For more information, refer to the [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0-beta.4/).
+
+You can run `npm run commit` to use the interactive commit wizard to help you write your commit messages.
 
 ### Branch Naming Conventions
 
