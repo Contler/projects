@@ -8,16 +8,27 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/guest-restaurant",
         "index": "apps/guest-restaurant/src/index.html",
         "browser": "apps/guest-restaurant/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/guest-restaurant/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/guest-restaurant/src/favicon.ico", "apps/guest-restaurant/src/assets"],
-        "styles": ["apps/guest-restaurant/src/styles.scss", "libs/share/styles/main.scss", "libs/share/styles/material.scss"],
+        "assets": [
+          "apps/guest-restaurant/src/favicon.ico",
+          "apps/guest-restaurant/src/assets"
+        ],
+        "styles": [
+          "apps/guest-restaurant/src/styles.scss",
+          "libs/share/styles/main.scss",
+          "libs/share/styles/material.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -40,7 +51,13 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true,
-          "baseHref": "/home/restaurant/"
+          "baseHref": "/home/restaurant/",
+          "fileReplacements": [
+            {
+              "replace": "apps/guest-restaurant/src/environments/environment.ts",
+              "with": "apps/guest-restaurant/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -65,11 +82,15 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/guest-restaurant/jest.config.ts"
       }

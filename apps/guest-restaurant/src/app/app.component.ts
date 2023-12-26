@@ -3,6 +3,7 @@ import { Auth, user } from '@angular/fire/auth';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { SpinnerHotelDirective } from '@contler/ui';
+import { RestaurantsService } from '@contler/core/restaurants';
 
 
 @Component({
@@ -16,9 +17,10 @@ export class AppComponent implements OnInit {
   isLoading = true;
   private auth: Auth = inject(Auth);
 
-  ngOnInit(): void {
-    user(this.auth).subscribe(console.log);
+  constructor(private restService: RestaurantsService) {
   }
+
+  ngOnInit(): void {}
 
   changeRouter() {
     this.isLoading = false;

@@ -10,6 +10,10 @@ function getProxiCofig(url: string, redirect?: { [p: string]: string }): Options
     target: url,
     changeOrigin: true,
     ws: true,
+    headers: {
+      'Connection': 'keep-alive',
+      'Keep-Alive': 'timeout=600' // Example: keep the connection alive for 600 seconds
+    }
   };
   if (process.env.PRODUCTION === 'true') {
     data.pathRewrite = redirect;
@@ -19,10 +23,14 @@ function getProxiCofig(url: string, redirect?: { [p: string]: string }): Options
 
 app.use('/home/restaurant', createProxyMiddleware(getProxiCofig(process.env.GUEST_RESTAURANT, { [`^/home/restaurant`]: '' })));
 
-app.use('/', createProxyMiddleware({
-  target: 'https://beta-guest-dev.web.app',
-  changeOrigin: true,
-}))
+app.use(
+  '/',
+  createProxyMiddleware({
+    target: process.env.GUEST_HOME,
+    changeOrigin: true,
+    ws: true,
+  }),
+);
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {

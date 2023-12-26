@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@contler/configState": ["libs/share/config-state/src/index.ts"],
+      "@contler/core/restaurants": ["libs/core/restaurants/src/index.ts"],
       "@contler/ui": ["libs/share/ui/src/index.ts"]
     }
   },
