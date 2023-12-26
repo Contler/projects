@@ -16,8 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@contler/configState": ["libs/share/config-state/src/index.ts"],
+      "@contler/core/guest": ["libs/core/guest/src/index.ts"],
       "@contler/core/restaurants": ["libs/core/restaurants/src/index.ts"],
-      "@contler/ui": ["libs/share/ui/src/index.ts"]
+      "@contler/ui": ["libs/share/ui/src/index.ts"],
+      "@contler/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

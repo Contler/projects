@@ -6,15 +6,15 @@ import { AuthHttpHandleService } from '@contler/utils';
 @Injectable({
   providedIn: 'root'
 })
-export class RestaurantsService {
+export class GuestService {
   private http: HttpClient;
 
   constructor(authHandle: AuthHttpHandleService, @Inject(API_URL) private apiUrl: string) {
     this.http = new HttpClient(authHandle);
   }
 
-  getRestaurantsByHotelId(hotelId: string) {
-    const url = new URL(`hotel/${hotelId}/restaurant`, this.apiUrl);
+  getGuests(guestId: string) {
+    const url = new URL(`/guest/${guestId}`, this.apiUrl);
     return this.http.get(url.toString());
   }
 }
