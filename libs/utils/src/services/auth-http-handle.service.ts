@@ -1,7 +1,7 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
-import { from, Observable, of, switchMap } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
 import { Auth, user } from '@angular/fire/auth';
+import { from, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class AuthHttpHandleService extends HttpHandler {
     super();
   }
 
-  handle(req: HttpRequest<any>): Observable<HttpEvent<any>> {
+  handle(req: HttpRequest<unknown>): Observable<HttpEvent<unknown>> {
     return user(this.auth).pipe(
       switchMap((userData) => {
         if (userData) {

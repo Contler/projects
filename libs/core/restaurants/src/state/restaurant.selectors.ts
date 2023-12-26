@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { RESTAURANT_FEATURE_KEY, RestaurantState, restaurantAdapter } from './restaurant.reducer';
 
 // Lookup the 'Restaurant' feature state managed by NgRx

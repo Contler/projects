@@ -2,11 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Auth, user, User } from '@angular/fire/auth';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
-import { SpinnerHotelDirective } from '@contler/ui';
-import { RestaurantsService } from '@contler/core/restaurants';
-import { filter, map } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { loadUser } from '@contler/configState';
+import { SpinnerHotelDirective } from '@contler/ui';
+import { Store } from '@ngrx/store';
+import { filter, map } from 'rxjs';
 
 @Component({
   standalone: true,
