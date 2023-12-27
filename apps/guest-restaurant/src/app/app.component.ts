@@ -20,7 +20,10 @@ export class AppComponent implements OnInit {
   isLoading = true;
   private auth: Auth = inject(Auth);
 
-  constructor(private store: Store, private translateService: TranslateService) {
+  constructor(
+    private store: Store,
+    private translateService: TranslateService,
+  ) {
     this.translateService.setDefaultLang('en_US');
     this.translateService.use('en_US');
   }
@@ -29,7 +32,7 @@ export class AppComponent implements OnInit {
     const syncData = localStorage['GetStorage'];
     if (syncData) {
       const data = JSON.parse(syncData);
-      if('hotelUid' in data) {
+      if ('hotelUid' in data) {
         this.store.dispatch(loadHotel({ hotelUid: data.hotelUid }));
       }
     }

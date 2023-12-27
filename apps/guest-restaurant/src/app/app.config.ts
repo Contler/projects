@@ -40,7 +40,7 @@ export const appConfig: ApplicationConfig = {
       TranslateModule.forRoot({
         loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] },
         defaultLanguage: 'en_US',
-        useDefaultLang: true
+        useDefaultLang: true,
       }),
     ),
     importProvidersFrom(provideFirebaseApp(() => initializeApp(environment.firebase))),
