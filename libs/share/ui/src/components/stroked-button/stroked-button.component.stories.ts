@@ -1,10 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { provideStore } from '@ngrx/store';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 import { StrokedButtonComponent } from './stroked-button.component';
 
 const meta: Meta<StrokedButtonComponent> = {
   component: StrokedButtonComponent,
   title: 'Buttons',
+  decorators: [
+    applicationConfig({
+      providers: [provideStore(),],
+    }),
+  ],
 };
 export default meta;
 

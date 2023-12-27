@@ -1,10 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { provideStore } from '@ngrx/store';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
   title: 'Buttons',
+  decorators: [
+    applicationConfig({
+      providers: [provideStore(),],
+    }),
+  ],
 };
 export default meta;
 interface StoryButtonProps {

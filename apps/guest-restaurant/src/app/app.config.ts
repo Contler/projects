@@ -7,7 +7,8 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { ConfigEffects, reducer, CONFIG_FEATURE_KEY } from '@contler/configState';
+import { CONFIG_FEATURE_KEY, ConfigEffects, reducer } from '@contler/configState';
+import { HotelEffects, hotelFeature } from '@contler/core/hotel';
 import { RESTAURANT_FEATURE_KEY, RestaurantEffects, restaurantReducer } from '@contler/core/restaurants';
 import { API_URL } from '@contler/utils';
 import { provideEffects } from '@ngrx/effects';
@@ -23,7 +24,8 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState({ name: RESTAURANT_FEATURE_KEY, reducer: restaurantReducer }),
     provideState({ name: CONFIG_FEATURE_KEY, reducer: reducer }),
-    provideEffects([RestaurantEffects, ConfigEffects]),
+    provideState({ name: hotelFeature.name, reducer: hotelFeature.reducer }),
+    provideEffects([RestaurantEffects, ConfigEffects, HotelEffects]),
     provideStoreDevtools({ logOnly: !isDevMode() }),
     provideAnimations(),
     provideRouter(appRoutes),
