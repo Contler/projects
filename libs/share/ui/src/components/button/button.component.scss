@@ -1,9 +1,11 @@
 :host {
-  @apply bg-ctr text-white flex justify-center items-center;
+  @apply flex justify-center items-center;
   font-size: 16px;
   font-weight: 600;
   line-height: normal;
   border-radius: 12px;
+  background-color: var(--ctr-btn-color, #171717);
+  color: var(--ctr-btn-text-color, #fff);
 
   &:disabled {
     @apply bg-gray-200 text-white;

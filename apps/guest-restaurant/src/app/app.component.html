@@ -1,8 +1,7 @@
 @if (isLoading) {
   <div class="flex items-center justify-center h-screen">
-    <mat-spinner ctrSpinnerHotel [strokeWidth]="5"></mat-spinner>
+    <mat-spinner ctrSpinnerHotel [strokeWidth]="4" [diameter]="60"></mat-spinner>
   </div>
 }
 
-
-<router-outlet (activate)="changeRouter()" ></router-outlet>
+<router-outlet (activate)="changeRouter()"></router-outlet>

@@ -2,5 +2,5 @@
   <span [style.opacity]="load ? 0 : 1">
     <ng-content></ng-content>
   </span>
-  <mat-spinner *ngIf="load" class="spinner" ctrSpinnerHotel diameter="30"></mat-spinner>
+  <mat-spinner *ngIf="load" class="spinner" ctrSpinnerHotel [useContrastColor]="true" diameter="30"></mat-spinner>
 </div>

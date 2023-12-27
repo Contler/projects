@@ -27,7 +27,6 @@ const reducer = createReducer(
   initialRestaurantState,
   on(RestaurantActions.initRestaurant, (state) => ({ ...state, loaded: false, error: null })),
   on(RestaurantActions.loadRestaurantSuccess, (state, { restaurant }) => restaurantAdapter.setAll(restaurant, { ...state, loaded: true })),
-  on(RestaurantActions.loadRestaurantFailure, (state, { error }) => ({ ...state, error })),
 );
 
 export function restaurantReducer(state: RestaurantState | undefined, action: Action) {
