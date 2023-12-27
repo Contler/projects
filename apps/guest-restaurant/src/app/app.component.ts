@@ -6,6 +6,7 @@ import { loadUser } from '@contler/configState';
 import { loadHotel } from '@contler/core/hotel';
 import { ButtonComponent, SpinnerHotelDirective, StrokedButtonComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -19,7 +20,10 @@ export class AppComponent implements OnInit {
   isLoading = true;
   private auth: Auth = inject(Auth);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private translateService: TranslateService) {
+    this.translateService.setDefaultLang('en_US');
+    this.translateService.use('en_US');
+  }
 
   ngOnInit(): void {
     user(this.auth)

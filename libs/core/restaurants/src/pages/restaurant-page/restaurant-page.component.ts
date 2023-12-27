@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { hotelFeature } from '@contler/core/hotel';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { filter, first } from 'rxjs';
 
 import { RestaurantsService } from '../../services';
@@ -11,7 +12,7 @@ import { RestaurantsService } from '../../services';
 @Component({
   selector: 'ctr-restaurant-page',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, TranslateModule],
   templateUrl: './restaurant-page.component.html',
   styleUrl: './restaurant-page.component.scss',
 })
