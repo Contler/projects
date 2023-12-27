@@ -18,4 +18,9 @@ export class HotelService {
     const url = new URL(`/hotel/user/${userUid}`, this.apiUrl);
     return this.http.get<HotelModel>(url.toString());
   }
+
+  getHotel(hotelUid: string) {
+    const url = new URL(`/hotel/${hotelUid}`, this.apiUrl);
+    return this.http.get<HotelModel>(url.toString());
+  }
 }

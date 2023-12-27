@@ -3,7 +3,7 @@ import { Auth, user, User } from '@angular/fire/auth';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { loadUser } from '@contler/configState';
-import { loadHotel } from '@contler/core/hotel';
+import { loadHotel, loadHotelByUser } from '@contler/core/hotel';
 import { ButtonComponent, SpinnerHotelDirective, StrokedButtonComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,6 +26,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const syncData = localStorage['GetStorage'];
+    if (syncData) {
+      const data = JSON.parse(syncData);
+      if('hotelUid' in data) {
+        this.store.dispatch(loadHotel({ hotelUid: data.hotelUid }));
+      }
+    }
     user(this.auth)
       .pipe(
         filter((user) => !!user),
@@ -33,7 +40,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe((user) => {
         this.store.dispatch(loadUser({ id: user.uid }));
-        this.store.dispatch(loadHotel({ userUid: user.uid }));
+        this.store.dispatch(loadHotelByUser({ userUid: user.uid }));
       });
   }
 
