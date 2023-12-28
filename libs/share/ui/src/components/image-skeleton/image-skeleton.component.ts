@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
+import { SkeletonAppearance } from './skeleton-apperance';
+
 @Component({
   selector: 'ctr-image-skeleton',
   standalone: true,
@@ -14,7 +16,7 @@ export class ImageSkeletonComponent {
   @Input() height: string = '100%';
   @Input() width: string = '100%';
   @Input() borderRadius: string = '0';
-  @Input() skeletonAppearance: 'circle' | 'line' | 'custom-content' = 'circle';
+  @Input() skeletonAppearance: SkeletonAppearance = SkeletonAppearance.CIRCLE;
   isLoading: boolean = true;
 
   onLoad() {

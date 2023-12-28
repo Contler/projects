@@ -3,9 +3,17 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 import { ImageSkeletonComponent } from './image-skeleton.component';
 
+const SKELETON_APPEARANCE_OPTIONS = ['circle', 'line', 'custom-content'];
+
 const meta: Meta<ImageSkeletonComponent> = {
   component: ImageSkeletonComponent,
   title: 'Images',
+  argTypes: {
+    skeletonAppearance: {
+      options: SKELETON_APPEARANCE_OPTIONS,
+      control: 'select'
+    },
+  },
   decorators: [
     applicationConfig({
       providers: [provideStore()],
@@ -38,8 +46,8 @@ export const SimpleImageSkeleton: Story = {
   }),
   args: {
     imageUrl: 'https://storage.googleapis.com/contler-dev.appspot.com/RoomService.jpeg',
-    height: '100%',
-    width: '100%',
+    height: '50px',
+    width: '50px',
     skeletonAppearance: 'circle',
     borderRadius: '0',
     isLoading: true,

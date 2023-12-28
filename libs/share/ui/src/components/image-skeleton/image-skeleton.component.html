@@ -1,10 +1,13 @@
-<ngx-skeleton-loader
-  [ngStyle]="{ display: isLoading ? 'block' : 'none' }"
-  [theme]="{ height: height, width: width }"
-  [appearance]="skeletonAppearance"
-></ngx-skeleton-loader>
-<img
-  [ngStyle]="{ display: isLoading ? 'none' : 'block', height: height, width: width, 'border-radius': borderRadius }"
-  [src]="imageUrl"
-  (load)="onLoad()"
-/>
+<div [ngStyle]="{ height: height, width: width, 'border-radius': borderRadius }">
+  <ngx-skeleton-loader
+    [ngStyle]="{ display: isLoading ? 'block' : 'none' }"
+    [theme]="{ height: height, width: width, margin: '0' }"
+    [appearance]="skeletonAppearance"
+  ></ngx-skeleton-loader>
+  <img
+    [ngStyle]="{ display: isLoading ? 'none' : 'block', height: '100%', width: '100%', 'border-radius': borderRadius }"
+    [src]="imageUrl"
+    (load)="onLoad()"
+    class="object-cover"
+  />
+</div>

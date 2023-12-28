@@ -56,7 +56,11 @@
       (action)="showClosedInfo = false"
       [label]="'restaurant.closeMessage' | translate"
       [actionText]="'common.gotIt' | translate"
-    ></ctr-info-card>
+    >
+      <ng-container icon>
+        <mat-icon> info </mat-icon>
+      </ng-container>
+    </ctr-info-card>
   </div>
 
   <div class="py-3">

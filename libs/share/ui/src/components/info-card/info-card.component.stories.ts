@@ -31,7 +31,10 @@ export const SimpleInfoCard: Story = {
     template: `<ctr-info-card
     [label]="label"
     [actionText]="actionText"
-     ></ctr-info-card>`,
+     >
+     <ng-container icon>info</ng-container>
+     
+     </ctr-info-card>`,
   }),
   args: {
     label: "You'll be able to program an order for when these are open",

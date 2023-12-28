@@ -1,11 +1,13 @@
 <div
-  class="rounded-xl border border-neutral-100 gap-x-2 grid grid-cols-[max-content_auto_max-content] items-center px-4 py-3 w-fit"
+  class="rounded-xl border border-neutral-100 gap-x-3 bg-neutral-50 grid grid-cols-[max-content_auto_max-content] items-center px-4 py-3 w-fit"
 >
-  <mat-icon>info</mat-icon>
+  <mat-icon [style.color]="hotelColor">
+    <ng-content select="[icon]"></ng-content>
+  </mat-icon>
   <p class="text-sm text-neutral-800">
     {{ label }}
   </p>
-  <a class="text-sm" (click)="onAction()">
+  <button class="text-sm" [style.color]="hotelColor" (click)="onAction()">
     {{ actionText }}
-  </a>
+  </button>
 </div>
