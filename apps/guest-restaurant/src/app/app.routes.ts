@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { RestaurantPageComponent } from '@contler/core/restaurants';
 
 import { isLoginGuard } from './guards/is-login.guard';
+import { RestaurantPageComponent } from './pages';
 
 export const appRoutes: Route[] = [
   {
@@ -11,7 +11,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'hola',
-    loadComponent: () => import('./nx-welcome.component').then(m => m.NxWelcomeComponent),
+    loadComponent: () => import('./nx-welcome.component').then((m) => m.NxWelcomeComponent),
     canActivate: [isLoginGuard],
-  }
+  },
 ];
