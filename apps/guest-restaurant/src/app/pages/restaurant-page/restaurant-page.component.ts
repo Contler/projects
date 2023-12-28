@@ -59,4 +59,8 @@ export class RestaurantPageComponent {
   goBack() {
     window.location.href = '/home/delivery';
   }
+
+  goToRestaurantProducts(restaurant: RestaurantModel) {
+    this.router.navigate([restaurant.uid, 'products']);
+  }
 }

@@ -1,0 +1,19 @@
+<div class="flex gap-x-3 py-4 border-b border-b-neutral-300 px-4" matRipple>
+  @if (imageUrl) {
+    <ctr-image-skeleton borderRadius="100%" [imageUrl]="imageUrl" height="70px" width="70px"></ctr-image-skeleton>
+  }
+
+  <div>
+    <p class="text-neutral-600 text-base font-semibold">
+      {{ title }}
+    </p>
+    <div class="mt-1.5"></div>
+    <p class="text-xs">
+      {{ description }}
+    </p>
+    <div class="mt-2.5"></div>
+    <p ctrHotelColor class="text-sm font-semibold">
+      {{ subtitle }}
+    </p>
+  </div>
+</div>

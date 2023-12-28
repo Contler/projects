@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center py-0.5 px-0.5" mat-ripple>
+<div class="flex justify-between items-center py-0.5 px-0.5" mat-ripple (click)="clickCard()">
   <div class="flex gap-x-4 items-center">
     <ctr-image-skeleton
       *ngIf="imageUrl"

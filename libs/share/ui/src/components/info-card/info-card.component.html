@@ -1,13 +1,13 @@
 <div
   class="rounded-xl border border-neutral-100 gap-x-3 bg-neutral-50 grid grid-cols-[max-content_auto_max-content] items-center px-4 py-3 w-fit"
 >
-  <mat-icon [style.color]="hotelColor">
+  <mat-icon [style.color]="hotelColor" [style.alignSelf]="alignIcon">
     <ng-content select="[icon]"></ng-content>
   </mat-icon>
-  <p class="text-sm text-neutral-800">
+  <p class="text-xs text-neutral-800">
     {{ label }}
   </p>
-  <button class="text-sm" [style.color]="hotelColor" (click)="onAction()">
+  <button class="text-xs" [style.color]="hotelColor" (click)="onAction()">
     {{ actionText }}
   </button>
 </div>
