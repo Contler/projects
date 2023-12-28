@@ -1,0 +1,73 @@
+<div class="w-full relative p-4 min-h-[133px]">
+  <div class="relative z-10 text-white">
+    <div class="flex items-center -mt-3">
+      <button class="p-3 -ml-3 flex" (click)="goBack()">
+        <mat-icon> arrow_back_ios </mat-icon>
+      </button>
+
+      <span class="flex-1"></span>
+      <button class="p-3 -mr-3 flex">
+        <mat-icon> menu </mat-icon>
+      </button>
+    </div>
+
+    <h1 class="text-center text-lg font-semibold mt-4">
+      {{ 'restaurants.title' | translate }}
+    </h1>
+  </div>
+
+  <div class="absolute w-full h-full top-0 left-0 z-0">
+    <img
+      src="https://storage.googleapis.com/contler-dev.appspot.com/RoomService.jpeg"
+      alt="logo"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute w-full h-full bg-black top-0 left-0 opacity-40"></div>
+  </div>
+</div>
+
+<div class="p-4">
+  <div class="flex justify-between">
+    <p class="text-neutral-600 text-lg">
+      {{ 'restaurants.open' | translate }}
+    </p>
+
+    <p class="text-neutral-400 text-xs font-semibold">{{ restaurants.length }} restaurants</p>
+  </div>
+
+  <div class="py-3">
+    <ctr-option-card
+      *ngFor="let restaurant of restaurants"
+      [title]="restaurant.name"
+      [imageUrl]="restaurant?.image || ''"
+    ></ctr-option-card>
+  </div>
+</div>
+
+<div class="p-4">
+  <div class="flex justify-between">
+    <p class="text-neutral-600 text-lg">{{ 'restaurants.close' | translate }}</p>
+
+    <p class="text-neutral-400 text-xs font-semibold">{{ restaurants.length }} restaurants</p>
+  </div>
+
+  <div class="py-2" *ngIf="showClosedInfo">
+    <ctr-info-card
+      (action)="showClosedInfo = false"
+      [label]="'restaurant.closeMessage' | translate"
+      [actionText]="'common.gotIt' | translate"
+    >
+      <ng-container icon>
+        <mat-icon> info </mat-icon>
+      </ng-container>
+    </ctr-info-card>
+  </div>
+
+  <div class="py-3">
+    <ctr-option-card
+      *ngFor="let restaurant of restaurants"
+      [title]="restaurant.name"
+      [imageUrl]="restaurant?.image || ''"
+    ></ctr-option-card>
+  </div>
+</div>

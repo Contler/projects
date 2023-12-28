@@ -8,7 +8,7 @@ const meta: Meta<ButtonComponent> = {
   title: 'Buttons',
   decorators: [
     applicationConfig({
-      providers: [provideStore(),],
+      providers: [provideStore()],
     }),
   ],
 };
