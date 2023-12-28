@@ -5,12 +5,15 @@ import { API_URL, AuthHttpHandleService } from '@contler/utils';
 import { RestaurantModel } from '../models/restaurant-model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RestaurantsService {
   private http: HttpClient;
 
-  constructor(authHandle: AuthHttpHandleService, @Inject(API_URL) private apiUrl: string) {
+  constructor(
+    authHandle: AuthHttpHandleService,
+    @Inject(API_URL) private apiUrl: string,
+  ) {
     this.http = new HttpClient(authHandle);
   }
 

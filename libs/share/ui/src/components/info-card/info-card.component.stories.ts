@@ -35,6 +35,6 @@ export const SimpleInfoCard: Story = {
   }),
   args: {
     label: "You'll be able to program an order for when these are open",
-    actionText: 'Got it'
+    actionText: 'Got it',
   },
 };
