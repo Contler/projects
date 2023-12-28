@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { API_URL, AuthHttpHandleService } from '@contler/utils';
 
-import { RestaurantModel } from '../models/restaurant-model';
+import { RestaurantModel } from '../models';
 
 @Injectable({
   providedIn: 'root',

@@ -9,11 +9,11 @@ const { selectAll, selectEntities } = restaurantAdapter.getSelectors();
 
 export const selectRestaurantLoaded = createSelector(selectRestaurantState, (state: RestaurantState) => state.loaded);
 
-export const selectRestaurantError = createSelector(selectRestaurantState, (state: RestaurantState) => state.error);
-
 export const selectAllRestaurant = createSelector(selectRestaurantState, (state: RestaurantState) => selectAll(state));
 
-export const selectRestaurantEntities = createSelector(selectRestaurantState, (state: RestaurantState) => selectEntities(state));
+export const selectRestaurantEntities = createSelector(selectRestaurantState, (state: RestaurantState) =>
+  selectEntities(state),
+);
 
 export const selectSelectedId = createSelector(selectRestaurantState, (state: RestaurantState) => state.selectedId);
 
