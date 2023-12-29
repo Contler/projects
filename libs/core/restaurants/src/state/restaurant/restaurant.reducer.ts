@@ -35,7 +35,7 @@ export const initialRestaurantState: RestaurantState = restaurantAdapter.getInit
 
 const reducer = createReducer(
   initialRestaurantState,
-  on(RestaurantActions.loadRestaurantsByHotel, (state) => ({ ...state, loaded: true, hasError: false })),
+  on(RestaurantActions.loadRestaurantsByHotel, (state) => ({ ...state, loaded: true, hasError: false, selectedId: null })),
   on(RestaurantActions.loadRestaurantById, (state, { id }) => ({
     ...state,
     loaded: true,

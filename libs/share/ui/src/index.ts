@@ -6,3 +6,4 @@ export * from './components/option-card/option-card.component';
 export * from './components/info-card/info-card.component';
 export * from './components/product-card/product-card.component';
 export * from './components/chip/chip.component';
+export * from './components/product-card-skeleton/product-card-skeleton.component';

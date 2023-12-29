@@ -7,12 +7,11 @@ import {
   CategoryModel,
   ProductModel,
   RestaurantDto,
-  RestaurantsService,
   loadRestaurantById,
   selectEntity,
   selectRestaurantLoaded,
 } from '@contler/core/restaurants';
-import { ChipComponent, InfoCardComponent, ProductCardComponent } from '@contler/ui';
+import { ChipComponent, InfoCardComponent, ProductCardComponent, ProductCardSkeletonComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, filter, map } from 'rxjs';
@@ -30,6 +29,7 @@ import { productsMocks, categoriesMocks } from './mocks';
     ChipComponent,
     ProductCardComponent,
     InfoCardComponent,
+    ProductCardSkeletonComponent,
   ],
   templateUrl: './restaurant-products-page.component.html',
   styleUrl: './restaurant-products-page.component.scss',
@@ -44,7 +44,6 @@ export class RestaurantProductsPageComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private restaurantService: RestaurantsService,
     private store: Store,
   ) {
     this.route.params.pipe(map((params) => params['id'])).subscribe((id) => {
