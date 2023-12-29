@@ -40,7 +40,10 @@ export class RestaurantPageComponent {
   restaurants$: Observable<RestaurantDto[]>;
   restaurantsClose$: Observable<RestaurantDto[]>;
 
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     this.store
       .select(hotelFeature.selectHotel)
       .pipe(

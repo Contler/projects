@@ -9,7 +9,6 @@ import { RestaurantsService } from '../../services';
 import * as RestaurantActions from './restaurant.actions';
 import { selectRestaurantEntities } from './restaurant.selectors';
 
-
 @Injectable()
 export class RestaurantEffects {
   private actions$ = inject(Actions);
