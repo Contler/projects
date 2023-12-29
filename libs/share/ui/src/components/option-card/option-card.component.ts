@@ -18,6 +18,8 @@ import { ImageSkeletonComponent } from '../image-skeleton/image-skeleton.compone
 export class OptionCardComponent {
   @Input() imageUrl: string | undefined = '';
   @Input() title: string = '';
+  @Input() description: string = '';
+  @Input() subtitle: string = '';
   hotelColor: string = '#000';
 
   constructor(private store: Store) {
