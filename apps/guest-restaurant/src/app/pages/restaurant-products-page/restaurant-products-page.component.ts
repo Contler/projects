@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryModel, ProductModel, RestaurantModel, RestaurantsService } from '@contler/core/restaurants';
-import { ChipComponent, InfoCardComponent, ItemCardComponent } from '@contler/ui';
+import { ChipComponent, InfoCardComponent, ProductCardComponent } from '@contler/ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { map, switchMap } from 'rxjs';
 
@@ -19,13 +19,13 @@ import { productsMocks, categoriesMocks } from './mocks';
     MatButtonModule,
     TranslateModule,
     ChipComponent,
-    ItemCardComponent,
+    ProductCardComponent,
     InfoCardComponent,
   ],
-  templateUrl: './restaurant-products.component.html',
-  styleUrl: './restaurant-products.component.scss',
+  templateUrl: './restaurant-products-page.component.html',
+  styleUrl: './restaurant-products-page.component.scss',
 })
-export class RestaurantProductsComponent implements OnInit {
+export class RestaurantProductsPageComponent implements OnInit {
   categories: CategoryModel[] = categoriesMocks;
   selectedCategory: CategoryModel = this.categories[0];
   products: ProductModel[] = productsMocks;

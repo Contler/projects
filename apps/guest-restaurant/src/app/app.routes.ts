@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 
 import { isLoginGuard } from './guards/is-login.guard';
 import { RestaurantPageComponent } from './pages';
-import { RestaurantProductsComponent } from './pages/restaurant-products-page/restaurant-products.component';
+import { RestaurantProductsPageComponent } from './pages/restaurant-products-page/restaurant-products-page.component';
 
 export const appRoutes: Route[] = [
   {
@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: ':id/products',
-    component: RestaurantProductsComponent,
+    component: RestaurantProductsPageComponent,
     canActivate: [isLoginGuard],
   },
   {

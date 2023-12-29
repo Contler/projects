@@ -1,10 +1,10 @@
 import { provideStore } from '@ngrx/store';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
-import { ItemCardComponent } from './item-card.component';
+import { ProductCardComponent } from './product-card.component';
 
-const meta: Meta<ItemCardComponent> = {
-  component: ItemCardComponent,
+const meta: Meta<ProductCardComponent> = {
+  component: ProductCardComponent,
   title: 'Card',
   decorators: [
     applicationConfig({
@@ -21,17 +21,17 @@ interface StoryItemCardProps {
   subtitle: string;
 }
 
-type Story = StoryObj<ItemCardComponent & StoryItemCardProps>;
+type Story = StoryObj<ProductCardComponent & StoryItemCardProps>;
 
 export const SimpleItemCard: Story = {
   render: (props) => ({
     props,
-    template: `<ctr-item-card
+    template: `<ctr-product-card
       [imageUrl]="imageUrl"
       [title]="title"
       [description]="description"
       [subtitle]="subtitle"
-     ></ctr-item-card>`,
+     ></ctr-product-card>`,
   }),
   args: {
     imageUrl:

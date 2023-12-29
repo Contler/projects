@@ -6,15 +6,15 @@ import { HotelColorDirective } from '../../directives/text-hotel-color.directive
 import { ImageSkeletonComponent } from '../image-skeleton/image-skeleton.component';
 
 @Component({
-  selector: 'ctr-item-card',
+  selector: 'ctr-product-card',
   standalone: true,
   imports: [CommonModule, ImageSkeletonComponent, HotelColorDirective, MatRippleModule],
-  templateUrl: './item-card.component.html',
-  styleUrl: './item-card.component.scss',
+  templateUrl: './product-card.component.html',
+  styleUrl: './product-card.component.scss',
 })
-export class ItemCardComponent {
+export class ProductCardComponent {
   @Input() imageUrl: string | undefined = '';
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Input() subtitle: string | null = '';
+  @Input() title: string | undefined = '';
+  @Input() description: string | undefined = '';
+  @Input() subtitle: string | null | undefined = '';
 }
