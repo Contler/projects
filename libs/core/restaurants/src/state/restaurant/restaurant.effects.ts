@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
-import { RestaurantDto } from '../../dto';
 import { RestaurantsService } from '../../services';
 
 import * as RestaurantActions from './restaurant.actions';
@@ -32,11 +31,9 @@ export class RestaurantEffects {
           return of(RestaurantActions.loadRestaurantByIdSuccess({}));
         } else {
           return this.restaurantService.getRestaurantById(action.id).pipe(
-            map((restaurant) =>
-              RestaurantActions.loadRestaurantByIdSuccess({
-                restaurant: new RestaurantDto(restaurant),
-              }),
-            ),
+            map((restaurant) => {
+              return RestaurantActions.loadRestaurantByIdSuccess({ restaurant: restaurant });
+            }),
           );
         }
       }),

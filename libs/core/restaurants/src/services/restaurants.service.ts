@@ -28,6 +28,6 @@ export class RestaurantsService {
 
   getRestaurantById(restaurantId: string) {
     const url = new URL(`restaurant/${restaurantId}`, this.apiUrl);
-    return this.http.get<RestaurantModel>(url.toString());
+    return this.http.get<RestaurantModel>(url.toString()).pipe(map((restaurant) => new RestaurantDto(restaurant)));
   }
 }

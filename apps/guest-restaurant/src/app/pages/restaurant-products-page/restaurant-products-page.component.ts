@@ -54,10 +54,11 @@ export class RestaurantProductsPageComponent {
     this.restaurant$ = this.store
       .select(selectEntity)
       .pipe(filter((restaurant) => !!restaurant)) as Observable<RestaurantDto>;
-
     this.restaurantClosed$ = this.restaurant$.pipe(
       filter((restaurant) => !!restaurant),
-      map((restaurant) => !restaurant.isOpen()),
+      map((restaurant) => {
+        return !restaurant?.isOpen();
+      }),
     );
   }
 
