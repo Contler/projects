@@ -1,13 +1,13 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { RestaurantModel } from '../../models';
+import { RestaurantDto } from '../../dto';
 
 import * as RestaurantActions from './restaurant.actions';
 
 export const RESTAURANT_FEATURE_KEY = 'restaurant';
 
-export interface RestaurantState extends EntityState<RestaurantModel> {
+export interface RestaurantState extends EntityState<RestaurantDto> {
   selectedId: string | null;
   loaded: boolean;
   hasError: boolean;
@@ -17,7 +17,7 @@ export interface RestaurantPartialState {
   readonly [RESTAURANT_FEATURE_KEY]: RestaurantState;
 }
 
-export const restaurantAdapter: EntityAdapter<RestaurantModel> = createEntityAdapter<RestaurantModel>({
+export const restaurantAdapter: EntityAdapter<RestaurantDto> = createEntityAdapter<RestaurantDto>({
   selectId: (restaurant) => restaurant.uid,
   sortComparer: (a, b) => {
     if (a.position != null && b.position != null) {
@@ -28,7 +28,7 @@ export const restaurantAdapter: EntityAdapter<RestaurantModel> = createEntityAda
 });
 
 export const initialRestaurantState: RestaurantState = restaurantAdapter.getInitialState({
-  loaded: false,
+  loaded: true,
   hasError: false,
   selectedId: null,
 });

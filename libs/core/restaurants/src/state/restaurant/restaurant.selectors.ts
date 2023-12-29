@@ -20,3 +20,11 @@ export const selectSelectedId = createSelector(selectRestaurantState, (state: Re
 export const selectEntity = createSelector(selectRestaurantEntities, selectSelectedId, (entities, selectedId) =>
   selectedId ? entities[selectedId] : undefined,
 );
+
+export const selectRestaurantOpen = createSelector(selectAllRestaurant, (restaurants) =>
+  restaurants.filter((restaurant) => restaurant.isOpen()),
+);
+
+export const selectRestaurantClose = createSelector(selectAllRestaurant, (restaurants) =>
+  restaurants.filter((restaurant) => !restaurant.isOpen()),
+);

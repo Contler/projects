@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { RestaurantModel } from '../../models';
+import { RestaurantDto } from '../../dto';
 
 export const loadRestaurantsByHotel = createAction(
   '[Restaurant Page] Load Restaurant by Hotel',
@@ -9,7 +9,7 @@ export const loadRestaurantsByHotel = createAction(
 
 export const loadRestaurantSuccess = createAction(
   '[Restaurant/API] Load Restaurant Success',
-  props<{ restaurant: RestaurantModel[] }>(),
+  props<{ restaurant: RestaurantDto[] }>(),
 );
 
 export const loadRestaurantFailure = createAction('[Restaurant/API] Load Restaurant Failure');

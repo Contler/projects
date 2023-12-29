@@ -17,6 +17,6 @@ export interface RestaurantModel {
 export interface RestaurantSchedule {
   id: number;
   days: string;
-  startTime: string;
-  endTime: string;
+  startTime: string | Date;
+  endTime: string | Date;
 }
