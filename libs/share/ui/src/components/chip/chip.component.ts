@@ -1,25 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
 import { hotelFeature } from '@contler/core/hotel';
 import { Store } from '@ngrx/store';
 import { filter, first } from 'rxjs';
 
-import { ImageSkeletonComponent } from '../image-skeleton/image-skeleton.component';
-
 @Component({
-  selector: 'ctr-option-card',
+  selector: 'ctr-chip',
   standalone: true,
-  imports: [CommonModule, ImageSkeletonComponent, MatIconModule, MatRippleModule],
-  templateUrl: './option-card.component.html',
-  styleUrl: './option-card.component.scss',
+  imports: [CommonModule],
+  templateUrl: './chip.component.html',
+  styleUrl: './chip.component.scss',
 })
-export class OptionCardComponent {
-  @Input() imageUrl: string | undefined = '';
-  @Input() title: string = '';
-  @Input() description: string | undefined = '';
-  @Input() subtitle: string | undefined = '';
+export class ChipComponent {
+  @Input() active = false;
   @Output() action: EventEmitter<void> = new EventEmitter();
   hotelColor: string = '#000';
 
@@ -33,7 +26,7 @@ export class OptionCardComponent {
       .subscribe((hotel) => (this.hotelColor = hotel?.color || this.hotelColor));
   }
 
-  clickCard() {
+  clickChip() {
     this.action.emit();
   }
 }

@@ -15,6 +15,7 @@ import { filter, first } from 'rxjs';
 export class InfoCardComponent {
   @Input() label: string = '';
   @Input() actionText: string = '';
+  @Input() alignIcon: 'start' | 'end' | 'center' = 'center';
   @Output() action: EventEmitter<void> = new EventEmitter();
   hotelColor: string = '#000';
 

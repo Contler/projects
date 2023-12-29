@@ -1,0 +1,23 @@
+<div class="flex gap-x-3 py-4 border-b border-b-neutral-300 px-4" matRipple>
+  <ngx-skeleton-loader
+    [theme]="{
+      'border-radius': '100%',
+      height: '70px',
+      width: '70px'
+    }"
+  ></ngx-skeleton-loader>
+
+  <div>
+    <ngx-skeleton-loader
+      [theme]="{
+        height: '20px',
+        width: '220px'
+      }"
+      appearance="line"
+    ></ngx-skeleton-loader>
+    <div class="mt-1.5"></div>
+    <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader>
+    <div class="mt-2.5"></div>
+    <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader>
+  </div>
+</div>

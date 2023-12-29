@@ -15,12 +15,19 @@ const meta: Meta<InfoCardComponent> = {
       imports: [BrowserAnimationsModule],
     }),
   ],
+  argTypes: {
+    alignIcon: {
+      control: 'select',
+      options: ['start', 'center', 'end'],
+    },
+  },
 };
 
 export default meta;
 interface StoryInfoCardProps {
   label: string;
   actionText: string;
+  alignIcon: 'start' | 'end' | 'center';
 }
 
 type Story = StoryObj<InfoCardComponent & StoryInfoCardProps>;
@@ -31,6 +38,7 @@ export const SimpleInfoCard: Story = {
     template: `<ctr-info-card
     [label]="label"
     [actionText]="actionText"
+    [alignIcon]="alignIcon"
      >
      <ng-container icon>info</ng-container>
      
@@ -39,5 +47,6 @@ export const SimpleInfoCard: Story = {
   args: {
     label: "You'll be able to program an order for when these are open",
     actionText: 'Got it',
+    alignIcon: 'center',
   },
 };

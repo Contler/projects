@@ -1,0 +1,67 @@
+<div class="w-full relative p-4 min-h-[133px]">
+  <div class="relative z-10 text-white">
+    <div class="flex items-center -mt-3 justify-between">
+      <button class="p-3 -ml-3 flex" (click)="goBack()">
+        <mat-icon> arrow_back_ios </mat-icon>
+      </button>
+
+      <p class="text-center text-lg font-semibold mt-4">
+        {{ (restaurant$ | async)?.name }}
+      </p>
+
+      <button class="p-3 -mr-3 flex">
+        <mat-icon> menu </mat-icon>
+      </button>
+    </div>
+
+    <h1 class="text-center text-lg font-semibold mt-4">
+      {{ 'restaurants.order' | translate }}
+    </h1>
+  </div>
+
+  <div class="absolute w-full h-full top-0 left-0 z-0">
+    <img
+      src="https://storage.googleapis.com/contler-dev.appspot.com/RoomService.jpeg"
+      alt="logo"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute w-full h-full bg-black top-0 left-0 opacity-40"></div>
+  </div>
+</div>
+
+<div class="py-5">
+  @if (restaurantClosed$ | async) {
+    <div class="mb-4 px-4">
+      <ctr-info-card [label]="'restaurant.alreadyClosed' | translate" alignIcon="start">
+        <ng-container icon>
+          <mat-icon fontSet="material-icons-outlined"> info </mat-icon>
+        </ng-container>
+      </ctr-info-card>
+    </div>
+  }
+
+  <div class="flex gap-x-2 overflow-x-auto px-4">
+    @for (category of categories; track category.uid) {
+      <ctr-chip [active]="category === selectedCategory" (action)="selectCategory(category)">
+        {{ category.name }}
+      </ctr-chip>
+    }
+  </div>
+
+  <div class="mt-3">
+    @if (isLoading$ | async) {
+      @for (item of [1, 2, 3, 4, 5]; track item) {
+        <ctr-product-card-skeleton></ctr-product-card-skeleton>
+      }
+    } @else {
+      @for (product of getCategoryProducts(); track product.id) {
+        <ctr-product-card
+          [title]="product.name"
+          [description]="product.description"
+          [subtitle]="product.value | currency"
+          [imageUrl]="product.image"
+        ></ctr-product-card>
+      }
+    }
+  </div>
+</div>

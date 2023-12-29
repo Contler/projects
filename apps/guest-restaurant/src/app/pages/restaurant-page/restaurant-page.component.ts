@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { hotelFeature, HotelModel } from '@contler/core/hotel';
 import {
   loadRestaurantsByHotel,
   RestaurantDto,
+  RestaurantModel,
   selectRestaurantClose,
   selectRestaurantLoaded,
   selectRestaurantOpen,
@@ -38,7 +40,10 @@ export class RestaurantPageComponent {
   restaurants$: Observable<RestaurantDto[]>;
   restaurantsClose$: Observable<RestaurantDto[]>;
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     this.store
       .select(hotelFeature.selectHotel)
       .pipe(
@@ -58,5 +63,9 @@ export class RestaurantPageComponent {
 
   goBack() {
     window.location.href = '/home/delivery';
+  }
+
+  goToRestaurantProducts(restaurant: RestaurantModel) {
+    this.router.navigate([restaurant.uid, 'products']);
   }
 }

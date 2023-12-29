@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center py-0.5 px-0.5" mat-ripple>
+<button class="flex justify-between items-center py-0.5 px-0.5 w-full" mat-ripple (click)="clickCard()">
   <div class="flex gap-x-4 items-center">
     <ctr-image-skeleton
       *ngIf="imageUrl"
@@ -8,7 +8,7 @@
       [imageUrl]="imageUrl"
     ></ctr-image-skeleton>
     <div>
-      <p class="text-base font-semibold text-neutral-600">{{ title }}</p>
+      <p class="text-sm font-semibold text-neutral-600">{{ title }}</p>
       @if (description) {
         <p class="text-neutral-800 text-xs">
           {{ description }}
@@ -25,4 +25,4 @@
     </div>
   </div>
   <mat-icon [style.color]="hotelColor" class="text-base !w-fit !h-fit"> arrow_forward_ios </mat-icon>
-</div>
+</button>
