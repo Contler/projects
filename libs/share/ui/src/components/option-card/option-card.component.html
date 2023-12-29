@@ -7,7 +7,22 @@
       borderRadius="100%"
       [imageUrl]="imageUrl"
     ></ctr-image-skeleton>
-    <p class="text-base font-semibold text-neutral-600">{{ title }}</p>
+    <div>
+      <p class="text-base font-semibold text-neutral-600">{{ title }}</p>
+      @if (description) {
+        <p class="text-neutral-800 text-xs">
+          {{ description }}
+        </p>
+      }
+
+      @if (subtitle) {
+        <div class="mt-1">
+          <p class="text-sm text-neutral-400">
+            {{ subtitle }}
+          </p>
+        </div>
+      }
+    </div>
   </div>
   <mat-icon [style.color]="hotelColor" class="text-base !w-fit !h-fit"> arrow_forward_ios </mat-icon>
 </div>
