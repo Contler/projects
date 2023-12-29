@@ -1,4 +1,4 @@
-<div class="w-full relative p-4 min-h-[133px]">
+<div class="w-full p-4 min-h-[133px] sticky top-0">
   <div class="relative z-10 text-white">
     <div class="flex items-center -mt-3">
       <button class="p-3 -ml-3 flex" (click)="goBack()">
@@ -27,47 +27,54 @@
 </div>
 
 <div class="p-4">
-  <div class="flex justify-between">
-    <p class="text-neutral-600 text-lg">
-      {{ 'restaurants.open' | translate }}
-    </p>
+  @if (isLoading$ | async) {
+    @for (item of [1, 2, 3, 4, 5]; track item) {
+      <div class="flex gap-8 items-center">
+        <ngx-skeleton-loader appearance="circle"></ngx-skeleton-loader>
+        <ngx-skeleton-loader class="flex-1" appearance="line" [theme]="{ margin: '0' }"></ngx-skeleton-loader>
+      </div>
+    }
+  } @else {
+    <div>
+      <div class="flex justify-between items-center">
+        <p class="text-neutral-600 text-lg">
+          {{ 'restaurants.open' | translate }}
+        </p>
 
-    <p class="text-neutral-400 text-xs font-semibold">{{ restaurants.length }} restaurants</p>
-  </div>
+        <p class="text-neutral-400 text-xs font-semibold">{{ (restaurants$ | async)?.length }} restaurants</p>
+      </div>
 
-  <div class="py-3">
-    <ctr-option-card
-      *ngFor="let restaurant of restaurants"
-      [title]="restaurant.name"
-      [imageUrl]="restaurant?.image || ''"
-    ></ctr-option-card>
-  </div>
-</div>
+      <div class="py-3 flex flex-col gap-2">
+        @for (restaurant of restaurants$ | async; track restaurant.uid) {
+          <ctr-option-card [title]="restaurant.name" [imageUrl]="restaurant?.image"></ctr-option-card>
+        }
+      </div>
+    </div>
 
-<div class="p-4">
-  <div class="flex justify-between">
-    <p class="text-neutral-600 text-lg">{{ 'restaurants.close' | translate }}</p>
+    <div>
+      <div class="flex justify-between">
+        <p class="text-neutral-600 text-lg">{{ 'restaurants.close' | translate }}</p>
 
-    <p class="text-neutral-400 text-xs font-semibold">{{ restaurants.length }} restaurants</p>
-  </div>
+        <p class="text-neutral-400 text-xs font-semibold">{{ restaurants.length }} restaurants</p>
+      </div>
 
-  <div class="py-2" *ngIf="showClosedInfo">
-    <ctr-info-card
-      (action)="showClosedInfo = false"
-      [label]="'restaurant.closeMessage' | translate"
-      [actionText]="'common.gotIt' | translate"
-    >
-      <ng-container icon>
-        <mat-icon> info </mat-icon>
-      </ng-container>
-    </ctr-info-card>
-  </div>
+      <div class="py-2" *ngIf="showClosedInfo">
+        <ctr-info-card
+          (action)="showClosedInfo = false"
+          [label]="'restaurant.closeMessage' | translate"
+          [actionText]="'common.gotIt' | translate"
+        >
+          <ng-container icon>
+            <mat-icon> info </mat-icon>
+          </ng-container>
+        </ctr-info-card>
+      </div>
 
-  <div class="py-3">
-    <ctr-option-card
-      *ngFor="let restaurant of restaurants"
-      [title]="restaurant.name"
-      [imageUrl]="restaurant?.image || ''"
-    ></ctr-option-card>
-  </div>
+      <div class="py-3">
+        @for (restaurant of restaurantsClose$ | async; track restaurant.uid) {
+          <ctr-option-card [title]="restaurant.name" [imageUrl]="restaurant?.image"></ctr-option-card>
+        }
+      </div>
+    </div>
+  }
 </div>
