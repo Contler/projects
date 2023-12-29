@@ -4,6 +4,7 @@ import { API_URL, AuthHttpHandleService } from '@contler/utils';
 import { map } from 'rxjs';
 
 import { RestaurantDto } from '../dto';
+import { RestaurantModel } from '../models';
 
 @Injectable({
   providedIn: 'root',

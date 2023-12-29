@@ -6,7 +6,7 @@
       </button>
 
       <p class="text-center text-lg font-semibold mt-4">
-        {{ restaurant?.name }}
+        {{ (restaurant$ | async)?.name }}
       </p>
 
       <button class="p-3 -mr-3 flex">
@@ -30,7 +30,7 @@
 </div>
 
 <div class="py-5">
-  @if (restaurantClosed) {
+  @if (restaurantClosed$ | async) {
     <div class="mb-4 px-4">
       <ctr-info-card [label]="'restaurant.alreadyClosed' | translate" alignIcon="start">
         <ng-container icon>
@@ -42,11 +42,9 @@
 
   <div class="flex gap-x-2 overflow-x-auto px-4">
     @for (category of categories; track category.uid) {
-      <ctr-chip
-        [text]="category.name"
-        [active]="category === selectedCategory"
-        (action)="selectCategory(category)"
-      ></ctr-chip>
+      <ctr-chip [active]="category === selectedCategory" (action)="selectCategory(category)">
+        {{ category.name }}
+      </ctr-chip>
     }
   </div>
 

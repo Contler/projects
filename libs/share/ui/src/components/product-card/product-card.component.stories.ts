@@ -14,16 +14,16 @@ const meta: Meta<ProductCardComponent> = {
 };
 
 export default meta;
-interface StoryItemCardProps {
+interface StoryProductCardProps {
   imageUrl: string;
   title: string;
   description: string;
   subtitle: string;
 }
 
-type Story = StoryObj<ProductCardComponent & StoryItemCardProps>;
+type Story = StoryObj<ProductCardComponent & StoryProductCardProps>;
 
-export const SimpleItemCard: Story = {
+export const SimpleProductCard: Story = {
   render: (props) => ({
     props,
     template: `<ctr-product-card

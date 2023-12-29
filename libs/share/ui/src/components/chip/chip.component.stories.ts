@@ -19,8 +19,8 @@ const meta: Meta<ChipComponent> = {
 
 export default meta;
 interface StoryChipProps {
-  text: string;
   active: boolean;
+  text: string;
 }
 
 type Story = StoryObj<ChipComponent & StoryChipProps>;
@@ -29,12 +29,13 @@ export const SimpleChip: Story = {
   render: (props) => ({
     props,
     template: `<ctr-chip
-    [text]="text"
     [active]="active"
-     ></ctr-chip>`,
+     >
+     {{ text }}
+     </ctr-chip>`,
   }),
   args: {
-    text: 'Entradas',
     active: true,
+    text: 'Chip',
   },
 };

@@ -36,8 +36,17 @@ export const initialRestaurantState: RestaurantState = restaurantAdapter.getInit
 const reducer = createReducer(
   initialRestaurantState,
   on(RestaurantActions.loadRestaurantsByHotel, (state) => ({ ...state, loaded: true, hasError: false })),
+  on(RestaurantActions.loadRestaurantById, (state, { id }) => ({
+    ...state,
+    loaded: true,
+    hasError: false,
+    selectedId: id,
+  })),
   on(RestaurantActions.loadRestaurantSuccess, (state, { restaurant }) =>
     restaurantAdapter.setAll(restaurant, { ...state, loaded: false }),
+  ),
+  on(RestaurantActions.loadRestaurantByIdSuccess, (state, { restaurant }) =>
+    restaurant ? restaurantAdapter.upsertOne(restaurant, { ...state, loaded: false }) : { ...state, loaded: false },
   ),
   on(RestaurantActions.loadRestaurantFailure, (state) => ({ ...state, loaded: false, hasError: true })),
 );

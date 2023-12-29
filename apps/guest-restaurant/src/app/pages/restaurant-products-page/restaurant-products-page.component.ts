@@ -1,12 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryModel, ProductModel, RestaurantModel, RestaurantsService } from '@contler/core/restaurants';
+import {
+  CategoryModel,
+  ProductModel,
+  RestaurantDto,
+  RestaurantsService,
+  loadRestaurantById,
+  selectEntity,
+  selectRestaurantLoaded,
+} from '@contler/core/restaurants';
 import { ChipComponent, InfoCardComponent, ProductCardComponent } from '@contler/ui';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { map, switchMap } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 import { productsMocks, categoriesMocks } from './mocks';
 
@@ -25,31 +34,31 @@ import { productsMocks, categoriesMocks } from './mocks';
   templateUrl: './restaurant-products-page.component.html',
   styleUrl: './restaurant-products-page.component.scss',
 })
-export class RestaurantProductsPageComponent implements OnInit {
+export class RestaurantProductsPageComponent {
   categories: CategoryModel[] = categoriesMocks;
   selectedCategory: CategoryModel = this.categories[0];
   products: ProductModel[] = productsMocks;
-  restaurant: RestaurantModel | undefined;
-  restaurantClosed: boolean = true;
+  restaurant$: Observable<RestaurantDto>;
+  restaurantClosed$: Observable<boolean>;
+  isLoading$: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
     private restaurantService: RestaurantsService,
-  ) {}
+    private store: Store,
+  ) {
+    this.route.params.pipe(map((params) => params['id'])).subscribe((id) => {
+      this.store.dispatch(loadRestaurantById({ id }));
+    });
+    this.isLoading$ = this.store.select(selectRestaurantLoaded);
+    this.restaurant$ = this.store
+      .select(selectEntity)
+      .pipe(filter((restaurant) => !!restaurant)) as Observable<RestaurantDto>;
 
-  ngOnInit(): void {
-    this.loadRestaurant();
-  }
-
-  loadRestaurant() {
-    this.route.params
-      .pipe(
-        map((params) => params['id']),
-        switchMap((id) => this.restaurantService.getRestaurantById(id)),
-      )
-      .subscribe((restaurant) => {
-        this.restaurant = restaurant;
-      });
+    this.restaurantClosed$ = this.restaurant$.pipe(
+      filter((restaurant) => !!restaurant),
+      map((restaurant) => !restaurant.isOpen()),
+    );
   }
 
   goBack() {

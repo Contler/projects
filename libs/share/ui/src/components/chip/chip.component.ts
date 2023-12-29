@@ -12,7 +12,6 @@ import { filter, first } from 'rxjs';
   styleUrl: './chip.component.scss',
 })
 export class ChipComponent {
-  @Input() text: string = '';
   @Input() active = false;
   @Output() action: EventEmitter<void> = new EventEmitter();
   hotelColor: string = '#000';

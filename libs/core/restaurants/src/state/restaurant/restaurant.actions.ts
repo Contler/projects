@@ -12,4 +12,11 @@ export const loadRestaurantSuccess = createAction(
   props<{ restaurant: RestaurantDto[] }>(),
 );
 
+export const loadRestaurantById = createAction('[Restaurant Page] Load Restaurant by Id', props<{ id: string }>());
+
+export const loadRestaurantByIdSuccess = createAction(
+  '[Restaurant/API] Load Restaurant by Id Success',
+  props<{ restaurant?: RestaurantDto }>(),
+);
+
 export const loadRestaurantFailure = createAction('[Restaurant/API] Load Restaurant Failure');
