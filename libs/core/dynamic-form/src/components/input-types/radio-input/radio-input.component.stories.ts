@@ -33,11 +33,7 @@ export const RadioInput: Story = {
     inputField: {
       description: 'Radio input',
       type: InputType.RADIO,
-      option:[
-        'Option 1',
-        'Option 2',
-        'Option 3'
-      ]
+      option: ['Option 1', 'Option 2', 'Option 3'],
     },
   },
 };

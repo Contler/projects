@@ -1,6 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validator,
+} from '@angular/forms';
 
 import { InputField } from '../../models/input-field';
 import { InputType } from '../../models/input-type';
@@ -28,9 +38,14 @@ import { TextInputComponent } from '../input-types/text-input/text-input.compone
       useExisting: forwardRef(() => DynamicFormComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DynamicFormComponent),
+      multi: true,
+    },
   ],
 })
-export class DynamicFormComponent implements OnChanges, ControlValueAccessor {
+export class DynamicFormComponent implements OnChanges, ControlValueAccessor, Validator {
   @Input() inputFieldList: InputField[] = [];
   form: FormGroup = new FormGroup({});
   inputType = InputType;
@@ -51,6 +66,32 @@ export class DynamicFormComponent implements OnChanges, ControlValueAccessor {
       });
       this.onChange(values);
     });
+  }
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    const errors: (ValidationErrors | null)[] = control.value?.map((inputField: InputField) => {
+      if (inputField.required === true || inputField.required === null) {
+        if (inputField.value === null) return { required: true };
+        switch (inputField.type) {
+          case InputType.MULTI_SELECT:
+            return Object.values(inputField.value as object).some((value) => value === true)
+              ? null
+              : { required: true };
+          case InputType.MULTISELECT_WITH_QUANTITY:
+            return Object.values(inputField.value as object).some((value) => value > 0) ? null : { required: true };
+          default:
+            return inputField.value ? null : { required: true };
+        }
+      } else {
+        return null;
+      }
+    });
+
+    if (errors === null) {
+      return { required: true };
+    }
+
+    return errors?.filter((error) => error !== null).length > 0 ? { required: true } : null;
   }
 
   writeValue(obj: unknown): void {
