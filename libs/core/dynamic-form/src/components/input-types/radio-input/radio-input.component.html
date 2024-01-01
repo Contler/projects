@@ -1,0 +1,16 @@
+<div>
+  <p class="text-base font-semibold">{{ inputField?.description }}</p>
+</div>
+<mat-radio-group class="roomservice-radio overflow-x-auto" [formControl]="control">
+  @for (value of inputField?.option || []; track value) {
+    <div class="w-full separator"></div>
+    <div class="flex justify-between items-center" (click)="selectValue(value)" matRipple>
+      <p>
+        {{ value }}
+      </p>
+
+      <mat-radio-button ctrRadioButton [value]="value" class="my-4 radio-button"> </mat-radio-button>
+    </div>
+  }
+  <div class="h-0.5 bg-gray-200 w-full"></div>
+</mat-radio-group>

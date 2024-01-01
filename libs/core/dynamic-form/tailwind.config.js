@@ -2,7 +2,8 @@ const { join } = require('path');
 
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
 
-const sharedTailwindConfig = require('../../libs/share/tailwind-preset/tailwind.config');
+const sharedTailwindConfig = require('../../../libs/share/tailwind-preset/tailwind.config');
+
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,6 +11,5 @@ module.exports = {
   content: [
     join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'),
     ...createGlobPatternsForDependencies(__dirname),
-    join(__dirname, '../../libs/core/dynamic-form/src/**/*.html'),
-  ],
+  ]
 };

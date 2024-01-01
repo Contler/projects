@@ -1,0 +1,16 @@
+<div>
+  <p class="text-base font-semibold">{{ inputField?.description }}</p>
+</div>
+
+<section class="" [formGroup]="group">
+  @for (op of inputField?.option; track op) {
+    <div class="h-0.5 bg-gray-200 w-full"></div>
+    <div class="flex justify-between py-[25px] items-center" matRipple (click)="selectValue(op)">
+      <p>
+        {{ op }}
+      </p>
+      <mat-checkbox ctrColorCheckbox (click)="$event.stopPropagation()" [formControlName]="op"></mat-checkbox>
+    </div>
+  }
+  <div class="h-0.5 bg-gray-200 w-full"></div>
+</section>

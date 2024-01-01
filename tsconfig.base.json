@@ -20,6 +20,7 @@
       "@contler/core/guest": ["libs/core/guest/src/index.ts"],
       "@contler/core/hotel": ["libs/core/hotel/src/index.ts"],
       "@contler/core/restaurants": ["libs/core/restaurants/src/index.ts"],
+      "@contler/dynamic-form": ["libs/core/dynamic-form/src/index.ts"],
       "@contler/translate": ["libs/share/translate/src/index.ts"],
       "@contler/ui": ["libs/share/ui/src/index.ts"],
       "@contler/utils": ["libs/utils/src/index.ts"]

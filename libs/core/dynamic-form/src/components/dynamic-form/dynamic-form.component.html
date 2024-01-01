@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+  @for (input of inputFieldList; track input; let i = $index) {
+    <div class="px-2">
+      @switch (input.type) {
+        @case (inputType.TEXT) {
+          <div class="my-3">
+            <contler-text-input [formControlName]="getControlName(i)" [inputField]="input"></contler-text-input>
+          </div>
+        }
+        @case (inputType.RADIO) {
+          <div class="my-3">
+            <contler-radio-input [formControlName]="getControlName(i)" [inputField]="input"></contler-radio-input>
+          </div>
+        }
+
+        @case (inputType.MULTI_SELECT) {
+          <div class="my-3">
+            <contler-multi-select [formControlName]="getControlName(i)" [inputField]="input"></contler-multi-select>
+          </div>
+        }
+
+        @case (inputType.MULTISELECT_WITH_QUANTITY) {
+          <div class="my-3">
+            <contler-multi-select-with-quantities
+              [formControlName]="getControlName(i)"
+              [inputField]="input"
+            ></contler-multi-select-with-quantities>
+          </div>
+        }
+      }
+    </div>
+  }
+</form>
