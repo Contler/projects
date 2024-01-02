@@ -26,5 +26,13 @@ export class HotelEffects {
     ),
   );
 
+  loadHotelConfig$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HotelActions.setHotel),
+      switchMap((action) => this.hotelService.getConfigHotel(action.hotel.uid)),
+      map((hotelConfig) => HotelActions.setHotelConfig({ hotelConfig })),
+    ),
+  );
+
   constructor(private hotelService: HotelService) {}
 }
