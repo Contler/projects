@@ -30,7 +30,7 @@
       </div>
     }
   </div>
-  <div class="pb-5" #parent>
+  <div #parent>
     @if (isLoading$ | async) {
       @for (item of [1, 2]; track item) {
         <ctr-product-card-skeleton></ctr-product-card-skeleton>

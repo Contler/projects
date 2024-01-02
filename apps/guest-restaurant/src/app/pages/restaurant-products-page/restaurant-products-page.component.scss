@@ -4,4 +4,5 @@
   max-height: -moz-available;
   display: grid;
   grid-template-rows: max-content max-content 1fr;
+  overflow: hidden;
 }
