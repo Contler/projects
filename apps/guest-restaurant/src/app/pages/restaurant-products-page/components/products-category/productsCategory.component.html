@@ -5,6 +5,7 @@
   @for (product of productsCategories; track product.id; let first = $first) {
     <div [class.pt-5]="first">
       <ctr-product-card
+        (openCard)="openProduct(product)"
         [imageUrl]="product.image"
         [title]="product.name | dynamicTranslate | async | capitalize"
         [subtitle]="product.value | currency: symbol ?? ''"

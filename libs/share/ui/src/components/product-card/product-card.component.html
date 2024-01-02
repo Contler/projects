@@ -1,4 +1,4 @@
-<div class="flex gap-x-3 py-4 border-b border-b-neutral-300 px-4" matRipple>
+<button class="w-full text-left flex gap-x-3 py-4 border-b border-b-neutral-300 px-4" matRipple (click)="clickCard()">
   @if (isVisible) {
     @if (imageUrl) {
       <ctr-image-skeleton borderRadius="100%" [imageUrl]="imageUrl" height="70px" width="70px"></ctr-image-skeleton>
@@ -22,4 +22,4 @@
   } @else {
     <div class="h-[100px]"></div>
   }
-</div>
+</button>

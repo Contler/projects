@@ -33,3 +33,10 @@ $admin-theme: mat.define-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($admin-theme);
+
+.bottom-sheet-container {
+  padding: 0;
+  & > mat-bottom-sheet-container.mat-bottom-sheet-container {
+    padding: 0;
+  }
+}

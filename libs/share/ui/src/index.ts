@@ -11,3 +11,5 @@ export * from './components/header/header.component';
 export * from './pipe/capitalize.pipe';
 export * from './components/scroll/scroll.component';
 export * from './components/scroll/components/scroll-item.component';
+export * from './components/modal-container/modal-container.component';
+export * from './directives/text-hotel-color.directive';

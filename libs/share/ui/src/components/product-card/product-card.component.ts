@@ -1,6 +1,6 @@
 import { ScrollDispatcher } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { MatRippleModule } from '@angular/material/core';
 
 import { HotelColorDirective } from '../../directives/text-hotel-color.directive';
@@ -18,6 +18,7 @@ export class ProductCardComponent implements AfterViewInit, OnDestroy {
   @Input() title: string | undefined = '';
   @Input() description: string | undefined = '';
   @Input() subtitle: string | null | undefined = '';
+  @Output() openCard = new EventEmitter<void>();
   isVisible = false;
   private observer: IntersectionObserver | undefined;
 
@@ -51,5 +52,9 @@ export class ProductCardComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.observer?.disconnect();
+  }
+
+  clickCard() {
+    this.openCard.emit();
   }
 }
