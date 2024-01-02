@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
@@ -56,12 +56,14 @@ import { ProductsCategoryComponent } from './components/products-category/produc
   templateUrl: './restaurant-products-page.component.html',
   styleUrl: './restaurant-products-page.component.scss',
 })
-export class RestaurantProductsPageComponent {
+export class RestaurantProductsPageComponent implements AfterViewInit {
   @ViewChild('scrolled') scrollable: ScrollComponent | undefined;
+  @ViewChild('parent') parent: ElementRef<HTMLElement> | undefined;
   restaurant$: Observable<RestaurantDto>;
   restaurantClosed$: Observable<boolean>;
   isLoading$: Observable<boolean>;
   categories$: Observable<CategoryDto[]>;
+  contentHeight = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -81,6 +83,17 @@ export class RestaurantProductsPageComponent {
       }),
     );
     this.categories$ = this.store.select(selectOpenCategories);
+  }
+
+  ngAfterViewInit(): void {
+    if (this.parent?.nativeElement) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          this.contentHeight = entry.contentRect.height;
+        }
+      });
+      resizeObserver.observe(this.parent.nativeElement);
+    }
   }
 
   goBack() {

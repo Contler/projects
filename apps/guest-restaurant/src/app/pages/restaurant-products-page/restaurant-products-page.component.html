@@ -30,17 +30,16 @@
       </div>
     }
   </div>
-
-  @if (isLoading$ | async) {
-    @for (item of [1, 2, 3]; track item) {
-      <ctr-product-card-skeleton></ctr-product-card-skeleton>
-    }
-  } @else {
-    <div class="pb-5" #parent>
-      <ctr-scroll #scrolled>
+  <div class="pb-5" #parent>
+    @if (isLoading$ | async) {
+      @for (item of [1, 2]; track item) {
+        <ctr-product-card-skeleton></ctr-product-card-skeleton>
+      }
+    } @else {
+      <ctr-scroll #scrolled [height]="contentHeight + 'px'">
         @for (category of categories$ | async; track category.uid; let last = $last) {
           <ctr-scroll-item (activeItem)="active(category)" [key]="category.uid">
-            <div [style.min-height]="last ? parent.offsetHeight + 'px' : 0">
+            <div [style.min-height]="last ? contentHeight + 'px' : 0">
               <contler-products-category
                 [category]="category"
                 [products]="(restaurant$ | async)?.products || []"
@@ -49,6 +48,6 @@
           </ctr-scroll-item>
         }
       </ctr-scroll>
-    </div>
-  }
+    }
+  </div>
 </div>

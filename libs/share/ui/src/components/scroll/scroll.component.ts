@@ -1,14 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { debounceTime, fromEvent, Subject } from 'rxjs';
 
 @Component({
@@ -29,16 +21,7 @@ export class ScrollComponent implements AfterViewInit {
   }
   private stoppedScrolled = new Subject<HTMLElement>();
 
-  constructor(
-    private elementRef: ElementRef<HTMLElement>,
-    private cdr: ChangeDetectorRef,
-  ) {}
-
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.height = this.elementRef.nativeElement.offsetHeight + 'px';
-      this.cdr.markForCheck();
-    });
     if (this.scrollable?.nativeElement) {
       fromEvent(this.scrollable?.nativeElement, 'scroll')
         .pipe(debounceTime(100))
