@@ -1,0 +1,17 @@
+<div class="rounded-t-lg bg-white overflow-y-scroll max-h-[65vh] relative" [style.padding-bottom]="footerHeight + 'px'">
+  @if (imageUrl) {
+    <ctr-image-skeleton height="186px" [skeletonAppearance]="skeletonType" [imageUrl]="imageUrl"></ctr-image-skeleton>
+  }
+  <div class="sticky top-0 z-10 flex px-4 py-2 bg-white">
+    <h2 class="flex-1" ctrHotelColor>{{ title }}</h2>
+    <button (click)="closeModal.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <ng-content select="[body]"></ng-content>
+
+  <div class="bg-gray-100 sticky" [style.bottom]="'-' + footerHeight + 'px'" #footerContent>
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</div>
