@@ -1,23 +1,20 @@
 import { Route } from '@angular/router';
+import { CATEGORIES_FEATURE_KEY, categoriesReducer } from '@contler/core/restaurants';
+import { provideState } from '@ngrx/store';
 
 import { isLoginGuard } from './guards/is-login.guard';
-import { RestaurantPageComponent } from './pages';
-import { RestaurantProductsPageComponent } from './pages/restaurant-products-page/restaurant-products-page.component';
+import * as Pages from './pages';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: RestaurantPageComponent,
+    component: Pages.RestaurantPageComponent,
     canActivate: [isLoginGuard],
   },
   {
     path: ':id/products',
-    component: RestaurantProductsPageComponent,
+    component: Pages.RestaurantProductsPageComponent,
     canActivate: [isLoginGuard],
-  },
-  {
-    path: 'hola',
-    loadComponent: () => import('./nx-welcome.component').then((m) => m.NxWelcomeComponent),
-    canActivate: [isLoginGuard],
+    providers: [provideState({ name: CATEGORIES_FEATURE_KEY, reducer: categoriesReducer })],
   },
 ];

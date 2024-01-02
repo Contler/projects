@@ -22,7 +22,11 @@ export class SpinnerHotelDirective implements AfterViewInit {
   private color: string | undefined;
   private opposite: string | undefined;
 
-  constructor(private cdr: ChangeDetectorRef, private store: Store, private elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private store: Store,
+    private elementRef: ElementRef<HTMLElement>,
+  ) {}
 
   ngAfterViewInit(): void {
     this.store

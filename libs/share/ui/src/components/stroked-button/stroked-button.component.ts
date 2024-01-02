@@ -20,7 +20,10 @@ import { SpinnerHotelDirective } from '../../directives/spinner-hotel.directive'
 export class StrokedButtonComponent implements AfterViewInit {
   @Input() load = false;
 
-  constructor(private store: Store, private elementRef: ElementRef<HTMLButtonElement>) {}
+  constructor(
+    private store: Store,
+    private elementRef: ElementRef<HTMLButtonElement>,
+  ) {}
 
   ngAfterViewInit(): void {
     this.store

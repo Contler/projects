@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input } from '@angular/core';
 import { MatRippleModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { hotelFeature, HotelModel } from '@contler/core/hotel';
@@ -34,7 +27,10 @@ export class ButtonComponent implements AfterViewInit {
    */
   @Input() load = false;
 
-  constructor(private store: Store, private elementRef: ElementRef<HTMLButtonElement>) {}
+  constructor(
+    private store: Store,
+    private elementRef: ElementRef<HTMLButtonElement>,
+  ) {}
 
   ngAfterViewInit(): void {
     this.store

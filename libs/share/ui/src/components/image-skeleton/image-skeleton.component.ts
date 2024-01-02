@@ -12,7 +12,7 @@ import { SkeletonAppearance } from './skeleton-apperance';
   styleUrl: './image-skeleton.component.scss',
 })
 export class ImageSkeletonComponent {
-  @Input() imageUrl: string = '';
+  @Input() imageUrl: string | undefined;
   @Input() height: string = '100%';
   @Input() width: string = '100%';
   @Input() borderRadius: string = '0';

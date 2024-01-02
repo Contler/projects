@@ -15,5 +15,7 @@ export function getOppositeColor(rgbString: string): string {
   const oppositeBlue = 255 - blue;
 
   // Convert back to a hex string and return
-  return `#${oppositeRed.toString(16).padStart(2, '0')}${oppositeGreen.toString(16).padStart(2, '0')}${oppositeBlue.toString(16).padStart(2, '0')}`;
+  return `#${oppositeRed.toString(16).padStart(2, '0')}${oppositeGreen.toString(16).padStart(2, '0')}${oppositeBlue
+    .toString(16)
+    .padStart(2, '0')}`;
 }

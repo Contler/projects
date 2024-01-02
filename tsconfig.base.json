@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@contler/configState": ["libs/share/config-state/src/index.ts"],
+      "@contler/core/dynamicTranslate": ["libs/core/dynamic-translate/src/index.ts"],
       "@contler/core/guest": ["libs/core/guest/src/index.ts"],
       "@contler/core/hotel": ["libs/core/hotel/src/index.ts"],
       "@contler/core/restaurants": ["libs/core/restaurants/src/index.ts"],

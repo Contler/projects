@@ -3,17 +3,19 @@
     <ctr-image-skeleton borderRadius="100%" [imageUrl]="imageUrl" height="70px" width="70px"></ctr-image-skeleton>
   }
 
-  <div class="flex-1">
+  <div class="flex-1 flex flex-col justify-center gap-1">
     <p class="text-neutral-600 text-base font-semibold">
       {{ title }}
     </p>
-    <div class="mt-1.5"></div>
-    <p class="text-xs">
-      {{ description }}
-    </p>
-    <div class="mt-2.5"></div>
-    <p ctrHotelColor class="text-sm font-semibold">
-      {{ subtitle }}
-    </p>
+    @if (description) {
+      <p class="text-xs">
+        {{ description }}
+      </p>
+    }
+    @if (subtitle) {
+      <p ctrHotelColor class="text-sm font-semibold">
+        {{ subtitle }}
+      </p>
+    }
   </div>
 </div>

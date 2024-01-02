@@ -19,7 +19,6 @@ const reducer = createReducer(
   on(HotelActions.setHotel, (state, { hotel }) => ({ ...state, hotel })),
 );
 
-
 export const hotelFeature = createFeature({
   name: HOTEL_FEATURE_KEY,
   reducer: reducer,

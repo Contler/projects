@@ -1,0 +1,19 @@
+<div class="p-4 overflow-x-scroll flex gap-2 chip">
+  @if (isLoaded$ | async) {
+    @for (item of [1, 2, 3, 4]; track item) {
+      <ngx-skeleton-loader
+        [theme]="{ 'border-radius': '40px', width: '100px', margin: 0, height: '32px' }"
+      ></ngx-skeleton-loader>
+    }
+  } @else {
+    @for (category of categories$ | async; track category.uid) {
+      <ctr-chip
+        [active]="category.uid === categorySelected"
+        (action)="changeCategory(category.uid)"
+        id="chip-category-{{ category.uid }}"
+      >
+        <span>{{ category.name | dynamicTranslate | async }}</span>
+      </ctr-chip>
+    }
+  }
+</div>

@@ -9,5 +9,5 @@ export const environment = {
     messagingSenderId: '424830318314',
     measurementId: 'G-YLK13DG5VC',
   },
-  apiUrl: 'https://api-gateway-67kp3eyg.uc.gateway.dev/'
+  apiUrl: 'https://api-gateway-67kp3eyg.uc.gateway.dev/',
 };
