@@ -12,6 +12,7 @@
         "{options.outputPath}"
       ],
       "options": {
+        "statsJson": true,
         "outputPath": "dist/apps/guest-restaurant",
         "index": "apps/guest-restaurant/src/index.html",
         "browser": "apps/guest-restaurant/src/main.ts",

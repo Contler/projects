@@ -3,17 +3,20 @@ import { CATEGORIES_FEATURE_KEY, categoriesReducer } from '@contler/core/restaur
 import { provideState } from '@ngrx/store';
 
 import { isLoginGuard } from './guards/is-login.guard';
-import * as Pages from './pages';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: Pages.RestaurantPageComponent,
+    loadComponent: () =>
+      import('./pages/restaurant-page/restaurant-page.component').then((m) => m.RestaurantPageComponent),
     canActivate: [isLoginGuard],
   },
   {
     path: ':id/products',
-    component: Pages.RestaurantProductsPageComponent,
+    loadComponent: () =>
+      import('./pages/restaurant-products-page/restaurant-products-page.component').then(
+        (m) => m.RestaurantProductsPageComponent,
+      ),
     canActivate: [isLoginGuard],
     providers: [provideState({ name: CATEGORIES_FEATURE_KEY, reducer: categoriesReducer })],
   },
