@@ -1,0 +1,8 @@
+.content {
+  height: 100vh;
+  max-height: -webkit-fill-available;
+  max-height: -moz-available;
+  display: grid;
+  grid-template-rows: max-content max-content 1fr;
+  overflow: hidden;
+}

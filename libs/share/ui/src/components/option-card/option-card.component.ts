@@ -17,7 +17,7 @@ import { ImageSkeletonComponent } from '../image-skeleton/image-skeleton.compone
 })
 export class OptionCardComponent {
   @Input() imageUrl: string | undefined = '';
-  @Input() title: string = '';
+  @Input() title: string | null = '';
   @Input() description: string | undefined = '';
   @Input() subtitle: string | undefined = '';
   @Output() action: EventEmitter<void> = new EventEmitter();

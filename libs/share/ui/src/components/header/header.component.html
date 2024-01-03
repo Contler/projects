@@ -1,0 +1,23 @@
+<div class="w-full relative p-4 min-h-[133px]">
+  <div class="relative z-10 text-white">
+    <div class="flex items-center -mt-3 justify-between">
+      <button class="p-3 -ml-3 flex" (click)="goBack()">
+        <mat-icon> arrow_back_ios </mat-icon>
+      </button>
+
+      <p class="text-center text-lg font-semibold">
+        {{ title }}
+      </p>
+
+      <button class="p-3 -mr-3 flex" (click)="goMenu()">
+        <mat-icon> menu </mat-icon>
+      </button>
+    </div>
+    <ng-content></ng-content>
+  </div>
+
+  <div class="absolute w-full h-full top-0 left-0 z-0">
+    <ctr-image-skeleton height="100%" width="100%" [imageUrl]="imageUrl"></ctr-image-skeleton>
+    <div class="absolute w-full h-full bg-black top-0 left-0 opacity-40"></div>
+  </div>
+</div>

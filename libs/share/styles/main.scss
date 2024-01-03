@@ -3,6 +3,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-html, body {
+html,
+body {
   font-family: 'Raleway', sans-serif;
+  --mat-bottom-sheet-container-background-color: transparent;
 }

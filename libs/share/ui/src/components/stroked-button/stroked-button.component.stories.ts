@@ -8,7 +8,7 @@ const meta: Meta<StrokedButtonComponent> = {
   title: 'Buttons',
   decorators: [
     applicationConfig({
-      providers: [provideStore(),],
+      providers: [provideStore()],
     }),
   ],
 };

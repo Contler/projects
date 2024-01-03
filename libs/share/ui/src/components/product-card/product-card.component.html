@@ -1,19 +1,25 @@
-<div class="flex gap-x-3 py-4 border-b border-b-neutral-300 px-4" matRipple>
-  @if (imageUrl) {
-    <ctr-image-skeleton borderRadius="100%" [imageUrl]="imageUrl" height="70px" width="70px"></ctr-image-skeleton>
-  }
+<button class="w-full text-left flex gap-x-3 py-4 border-b border-b-neutral-300 px-4" matRipple (click)="clickCard()">
+  @if (isVisible) {
+    @if (imageUrl) {
+      <ctr-image-skeleton borderRadius="100%" [imageUrl]="imageUrl" height="70px" width="70px"></ctr-image-skeleton>
+    }
 
-  <div class="flex-1">
-    <p class="text-neutral-600 text-base font-semibold">
-      {{ title }}
-    </p>
-    <div class="mt-1.5"></div>
-    <p class="text-xs">
-      {{ description }}
-    </p>
-    <div class="mt-2.5"></div>
-    <p ctrHotelColor class="text-sm font-semibold">
-      {{ subtitle }}
-    </p>
-  </div>
-</div>
+    <div class="flex-1 flex flex-col justify-center gap-1">
+      <p class="text-neutral-600 text-base font-semibold">
+        {{ title }}
+      </p>
+      @if (description) {
+        <p class="text-xs">
+          {{ description }}
+        </p>
+      }
+      @if (subtitle) {
+        <p ctrHotelColor class="text-sm font-semibold">
+          {{ subtitle }}
+        </p>
+      }
+    </div>
+  } @else {
+    <div class="h-[100px]"></div>
+  }
+</button>

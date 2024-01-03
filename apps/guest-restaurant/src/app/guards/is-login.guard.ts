@@ -5,9 +5,12 @@ import { map, tap } from 'rxjs';
 
 export const isLoginGuard: CanActivateFn = () => {
   const auth: Auth = inject(Auth);
-  return user(auth).pipe(map((user) => !!user), tap((isLogin) => {
-    if (!isLogin) {
-      window.location.href = '/';
-    }
-  }));
+  return user(auth).pipe(
+    map((user) => !!user),
+    tap((isLogin) => {
+      if (!isLogin) {
+        window.location.href = '/';
+      }
+    }),
+  );
 };

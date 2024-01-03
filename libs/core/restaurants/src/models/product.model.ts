@@ -5,7 +5,7 @@ export interface ProductModel {
   state: boolean;
   description: string;
   category: string;
-  image: string;
+  image?: string;
   formId: string;
   position: number | null;
 }

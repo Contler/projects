@@ -9,7 +9,12 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { CONFIG_FEATURE_KEY, ConfigEffects, reducer } from '@contler/configState';
 import { HotelEffects, hotelFeature } from '@contler/core/hotel';
-import { RESTAURANT_FEATURE_KEY, RestaurantEffects, restaurantReducer } from '@contler/core/restaurants';
+import {
+  CategoriesEffects,
+  RESTAURANT_FEATURE_KEY,
+  RestaurantEffects,
+  restaurantReducer,
+} from '@contler/core/restaurants';
 import { SimpleLocalizeHttpLoaderService } from '@contler/translate';
 import { API_URL } from '@contler/utils';
 import { provideEffects } from '@ngrx/effects';
@@ -31,7 +36,7 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: RESTAURANT_FEATURE_KEY, reducer: restaurantReducer }),
     provideState({ name: CONFIG_FEATURE_KEY, reducer: reducer }),
     provideState({ name: hotelFeature.name, reducer: hotelFeature.reducer }),
-    provideEffects([RestaurantEffects, ConfigEffects, HotelEffects]),
+    provideEffects([RestaurantEffects, ConfigEffects, HotelEffects, CategoriesEffects]),
     provideStoreDevtools({ logOnly: !isDevMode() }),
     provideAnimations(),
     provideRouter(appRoutes),

@@ -1,0 +1,13 @@
+<ctr-modal-container
+  [imageUrl]="data.image"
+  [title]="$any(data.name | dynamicTranslate | async)"
+  (closeModal)="close()"
+>
+  <ng-container body>
+    <p class="text-xm px-4">{{ data.description | dynamicTranslate | async }}</p>
+    <p class="mt-4 px-4" ctrHotelColor>{{ data.value | currency: currency ?? '' }}</p>
+  </ng-container>
+  <div footer class="p-4 flex gap-2">
+    <button ctrButton class="flex-1">{{ 'cart.confirmOrder' | translate }}</button>
+  </div>
+</ctr-modal-container>

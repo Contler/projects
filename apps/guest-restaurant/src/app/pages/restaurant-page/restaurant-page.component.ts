@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
 import { hotelFeature, HotelModel } from '@contler/core/hotel';
 import {
   loadRestaurantsByHotel,
@@ -12,7 +13,7 @@ import {
   selectRestaurantLoaded,
   selectRestaurantOpen,
 } from '@contler/core/restaurants';
-import { InfoCardComponent, OptionCardComponent } from '@contler/ui';
+import { CapitalizePipe, HeaderComponent, InfoCardComponent, OptionCardComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -29,6 +30,9 @@ import { filter, first, map, Observable } from 'rxjs';
     OptionCardComponent,
     InfoCardComponent,
     NgxSkeletonLoaderModule,
+    DynamicTranslatePipe,
+    HeaderComponent,
+    CapitalizePipe,
   ],
   templateUrl: './restaurant-page.component.html',
   styleUrl: './restaurant-page.component.scss',
@@ -66,6 +70,6 @@ export class RestaurantPageComponent {
   }
 
   goToRestaurantProducts(restaurant: RestaurantModel) {
-    this.router.navigate([restaurant.uid, 'products']);
+    this.router.navigate([restaurant.uid, 'products'], { state: { backUrl: '/' } });
   }
 }

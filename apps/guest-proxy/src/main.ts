@@ -11,9 +11,9 @@ function getProxiCofig(url: string, redirect?: { [p: string]: string }): Options
     changeOrigin: true,
     ws: true,
     headers: {
-      'Connection': 'keep-alive',
-      'Keep-Alive': 'timeout=600' // Example: keep the connection alive for 600 seconds
-    }
+      Connection: 'keep-alive',
+      'Keep-Alive': 'timeout=600', // Example: keep the connection alive for 600 seconds
+    },
   };
   if (process.env.PRODUCTION === 'true') {
     data.pathRewrite = redirect;
@@ -21,7 +21,10 @@ function getProxiCofig(url: string, redirect?: { [p: string]: string }): Options
   return data;
 }
 
-app.use('/home/restaurant', createProxyMiddleware(getProxiCofig(process.env.GUEST_RESTAURANT, { [`^/home/restaurant`]: '' })));
+app.use(
+  '/home/restaurant',
+  createProxyMiddleware(getProxiCofig(process.env.GUEST_RESTAURANT, { [`^/home/restaurant`]: '' })),
+);
 
 app.use(
   '/',

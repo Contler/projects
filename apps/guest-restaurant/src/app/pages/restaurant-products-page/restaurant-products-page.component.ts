@@ -1,22 +1,36 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
+import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
 import {
-  CategoryModel,
-  ProductModel,
-  RestaurantDto,
+  CategoryDto,
   loadRestaurantById,
+  RestaurantDto,
+  selectCategory,
   selectEntity,
+  selectOpenCategories,
   selectRestaurantLoaded,
+  selectSelectedCategoryId,
 } from '@contler/core/restaurants';
-import { ChipComponent, InfoCardComponent, ProductCardComponent, ProductCardSkeletonComponent } from '@contler/ui';
+import {
+  CapitalizePipe,
+  ChipComponent,
+  HeaderComponent,
+  InfoCardComponent,
+  ProductCardComponent,
+  ProductCardSkeletonComponent,
+  ScrollComponent,
+  ScrollItemComponent,
+} from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable, filter, map } from 'rxjs';
+import { filter, first, map, Observable } from 'rxjs';
 
-import { productsMocks, categoriesMocks } from './mocks';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ProductsCategoryComponent } from './components/products-category/productsCategory.component';
 
 @Component({
   selector: 'contler-restaurant-products',
@@ -30,17 +44,26 @@ import { productsMocks, categoriesMocks } from './mocks';
     ProductCardComponent,
     InfoCardComponent,
     ProductCardSkeletonComponent,
+    CategoriesComponent,
+    HeaderComponent,
+    DynamicTranslatePipe,
+    CapitalizePipe,
+    ProductsCategoryComponent,
+    CdkScrollable,
+    ScrollComponent,
+    ScrollItemComponent,
   ],
   templateUrl: './restaurant-products-page.component.html',
   styleUrl: './restaurant-products-page.component.scss',
 })
-export class RestaurantProductsPageComponent {
-  categories: CategoryModel[] = categoriesMocks;
-  selectedCategory: CategoryModel = this.categories[0];
-  products: ProductModel[] = productsMocks;
+export class RestaurantProductsPageComponent implements AfterViewInit {
+  @ViewChild('scrolled') scrollable: ScrollComponent | undefined;
+  @ViewChild('parent') parent: ElementRef<HTMLElement> | undefined;
   restaurant$: Observable<RestaurantDto>;
   restaurantClosed$: Observable<boolean>;
   isLoading$: Observable<boolean>;
+  categories$: Observable<CategoryDto[]>;
+  contentHeight = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,17 +82,36 @@ export class RestaurantProductsPageComponent {
         return !restaurant?.isOpen();
       }),
     );
+    this.categories$ = this.store.select(selectOpenCategories);
+  }
+
+  ngAfterViewInit(): void {
+    if (this.parent?.nativeElement) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          this.contentHeight = entry.contentRect.height;
+        }
+      });
+      resizeObserver.observe(this.parent.nativeElement);
+    }
   }
 
   goBack() {
     window.location.href = '/home/delivery';
   }
 
-  selectCategory(category: CategoryModel) {
-    this.selectedCategory = category;
+  active(category: CategoryDto) {
+    this.store
+      .select(selectSelectedCategoryId)
+      .pipe(first())
+      .subscribe((id) => {
+        if (id !== category.uid) {
+          this.store.dispatch(selectCategory({ categoryId: category.uid }));
+        }
+      });
   }
 
-  getCategoryProducts() {
-    return this.products.filter((product) => product.category === this.selectedCategory.uid);
+  goToCategory(uid: string | number | undefined) {
+    this.scrollable?.scrollElement(uid as string);
   }
 }
