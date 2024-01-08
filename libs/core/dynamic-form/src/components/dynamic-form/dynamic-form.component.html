@@ -1,30 +1,32 @@
 <section [formGroup]="form">
-  @for (input of inputFieldList; track input; let i = $index) {
-    <div>
-      @switch (input.type) {
-        @case (inputType.TEXT) {
-          <div class="my-3">
-            <ctr-text-input [formControlName]="getControlName(i)"></ctr-text-input>
-          </div>
-        }
-        @case (inputType.RADIO) {
-          <div class="my-3">
-            <ctr-radio-input [formControlName]="getControlName(i)"></ctr-radio-input>
-          </div>
-        }
+  <div formArrayName="items">
+    @for (control of itemForm.controls; track control) {
+      <div>
+        @switch (control.value.type) {
+          @case (inputType.TEXT) {
+            <div class="my-3">
+              <ctr-text-input [formControl]="$any(control)"></ctr-text-input>
+            </div>
+          }
+          @case (inputType.RADIO) {
+            <div class="my-3">
+              <ctr-radio-input [formControl]="$any(control)"></ctr-radio-input>
+            </div>
+          }
 
-        @case (inputType.MULTI_SELECT) {
-          <div class="my-3">
-            <ctr-multi-select [formControlName]="getControlName(i)"></ctr-multi-select>
-          </div>
-        }
+          @case (inputType.MULTI_SELECT) {
+            <div class="my-3">
+              <ctr-multi-select [formControl]="$any(control)"></ctr-multi-select>
+            </div>
+          }
 
-        @case (inputType.MULTISELECT_WITH_QUANTITY) {
-          <div class="my-3">
-            <ctr-multi-select-with-quantities [formControlName]="getControlName(i)"></ctr-multi-select-with-quantities>
-          </div>
+          @case (inputType.MULTISELECT_WITH_QUANTITY) {
+            <div class="my-3">
+              <ctr-multi-select-with-quantities [formControl]="$any(control)"></ctr-multi-select-with-quantities>
+            </div>
+          }
         }
-      }
-    </div>
-  }
+      </div>
+    }
+  </div>
 </section>

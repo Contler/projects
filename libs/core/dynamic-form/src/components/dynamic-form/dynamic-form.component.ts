@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input } from '@angular/core';
 import {
   ControlValueAccessor,
+  FormArray,
   FormControl,
   FormGroup,
   NG_VALIDATORS,
@@ -43,23 +44,23 @@ import { TextInputComponent } from '../input-types/text-input/text-input.compone
     },
   ],
 })
-export class DynamicFormComponent implements OnChanges, ControlValueAccessor, Validator {
+export class DynamicFormComponent implements ControlValueAccessor, Validator, AfterViewInit {
   @Input() inputFieldList: InputField[] = [];
-  form: FormGroup = new FormGroup({});
+  form: FormGroup = new FormGroup({ items: new FormArray([]) });
   inputType = InputType;
   onChange: (value: unknown) => void = () => {};
   onTouched: (value: unknown) => void = () => {};
 
-  ngOnChanges(): void {
-    this.inputFieldList.forEach((inputField, index) => {
-      const key = `inp-field-${index}`;
-      this.form.addControl(key, new FormControl(inputField));
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit(): void {
+    this.inputFieldList.forEach((inputField) => {
+      this.itemForm.push(new FormControl(inputField));
     });
-    this.form.valueChanges.subscribe((value) => {
-      const values = this.inputFieldList.map((inputField, index) => {
-        return value[`inp-field-${index}`];
-      });
-      this.onChange(values);
+    this.cdr.detectChanges();
+    this.onChange([]);
+    this.itemForm.valueChanges.subscribe((value) => {
+      this.onChange(value);
     });
   }
 
@@ -73,15 +74,15 @@ export class DynamicFormComponent implements OnChanges, ControlValueAccessor, Va
     }
   }
 
-  getControlName(index: number): string {
-    return `inp-field-${index}`;
-  }
-
   registerOnChange(fn: (value: unknown) => void): void {
     this.onChange = fn;
   }
 
   registerOnTouched(fn: (value: unknown) => void): void {
     this.onTouched = fn;
+  }
+
+  get itemForm(): FormArray {
+    return this.form.get('items') as FormArray;
   }
 }

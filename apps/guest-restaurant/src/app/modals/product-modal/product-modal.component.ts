@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatInputModule } from '@angular/material/input';
@@ -40,6 +40,7 @@ import { filter, first } from 'rxjs';
   ],
   templateUrl: './product-modal.component.html',
   styleUrl: './product-modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductModalComponent implements OnInit {
   currency: string | undefined;
