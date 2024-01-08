@@ -20,4 +20,9 @@ export const appRoutes: Route[] = [
     canActivate: [isLoginGuard],
     providers: [provideState({ name: CATEGORIES_FEATURE_KEY, reducer: categoriesReducer })],
   },
+  {
+    path: 'checkout',
+    loadComponent: () => import('./pages/checkout-page/checkout-page.component').then((m) => m.CheckoutPageComponent),
+    canActivate: [isLoginGuard],
+  },
 ];

@@ -1,0 +1,20 @@
+<div
+  class="bg-[#FCFCFC] py-3 px-4 my-2.5 flex justify-between rounded-xl border border-[#F1F3F5] items-center"
+  [style.border-color]="selected ? hotelColor : '#F1F3F5'"
+  mat-ripple
+  (click)="click()"
+>
+  <div>
+    <p class="text-base font-semibold">
+      {{ label }}
+    </p>
+    <p class="text-sm">
+      {{ subtitle }}
+    </p>
+  </div>
+  @if (selected) {
+    <mat-icon class="text-base" [style.color]="hotelColor"> check_circle </mat-icon>
+  } @else {
+    <mat-icon class="text-base" [style.color]="hotelColor"> radio_button_unchecked </mat-icon>
+  }
+</div>

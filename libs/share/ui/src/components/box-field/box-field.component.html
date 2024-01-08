@@ -1,0 +1,30 @@
+<div
+  class="border bg-white rounded-xl px-2 py-3 grid grid-cols-[max-content_auto_max-content] items-center cursor-pointer gap-x-3.5 border-neutral-200"
+  mat-ripple
+  (click)="clickBox()"
+>
+  <mat-icon class="text-neutral-400" fontSet="material-icons-outlined">
+    <ng-content select="[icon]"></ng-content>
+  </mat-icon>
+
+  <div>
+    @if (title) {
+      <p class="text-sm text-neutral-300">
+        {{ title }}
+      </p>
+    }
+    @if (label) {
+      <p class="text-base text-neutral-600 font-semibold">
+        {{ label }}
+      </p>
+    }
+
+    @if (description) {
+      <p class="text-sm">
+        {{ description }}
+      </p>
+    }
+  </div>
+
+  <mat-icon> keyboard_arrow_right </mat-icon>
+</div>

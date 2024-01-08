@@ -1,0 +1,9 @@
+<ctr-modal-container title="Where do you want to receive it">
+  <ng-container body>
+    <div class="px-4">
+      @for (zone of data.zones; track zone.uid) {
+        <ctr-select-option [label]="zone.name" [selected]="zone.uid === data?.selectedZone?.uid"></ctr-select-option>
+      }
+    </div>
+  </ng-container>
+</ctr-modal-container>

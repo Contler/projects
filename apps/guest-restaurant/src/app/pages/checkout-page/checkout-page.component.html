@@ -1,0 +1,119 @@
+<ctr-navbar></ctr-navbar>
+<div class="px-4 py-5">
+  <div class="mb-3">
+    <p class="text-xl font-semibold">Confirm your order</p>
+  </div>
+  <p class="text-base font-semibold">Products</p>
+
+  <div class="border rounded-xl p-2">
+    @for (cartItemByRestaurant of cart.cartItemsByRestaurant; track cartItemByRestaurant.restaurant.uid) {
+      <div
+        class="flex justify-between items-center border-b pb-4 pt-2 px-1"
+        mat-ripple
+        (click)="expandRestaurant(cartItemByRestaurant.restaurant.uid)"
+      >
+        <div class="flex gap-x-2 items-center">
+          <img class="h-8 w-8 object-cover rounded-[100%]" [src]="cartItemByRestaurant.restaurant.image" alt="" />
+          <p class="text-sm font-semibold">
+            {{ cartItemByRestaurant.restaurant.name | dynamicTranslate | async }}
+          </p>
+        </div>
+        <div class="flex gap-x-2 items-center">
+          <p class="text-sm font-semibold">{{ cartItemByRestaurant.orders.length }} Products</p>
+          @if (isRestaurantExpanded(cartItemByRestaurant.restaurant.uid)) {
+            <mat-icon> expand_less </mat-icon>
+          } @else {
+            <mat-icon> expand_more </mat-icon>
+          }
+        </div>
+      </div>
+
+      @if (isRestaurantExpanded(cartItemByRestaurant.restaurant.uid)) {
+        @for (order of cartItemByRestaurant.orders; track order.id) {
+          <div class="border-b border-neutral-200 py-2 px-1">
+            <div class="flex gap-x-5">
+              <img [src]="order.product.image" class="w-[50px] h-[50px] rounded-xl" alt="" />
+              <div>
+                <p class="text-sm font-semibold">
+                  {{ order.product.name | dynamicTranslate | async }}
+                </p>
+                <p class="text-sm font-semibold text-neutral-300">
+                  {{ order.product.description | dynamicTranslate | async }}
+                </p>
+
+                <p class="text-sm font-semibold text-neutral-600 flex gap-x-2">
+                  {{ order.product.value * order.quantity | currency: symbol ?? '' }}
+                </p>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="flex gap-x-2">
+                @if (order.quantity > 1) {
+                  <mat-icon> remove </mat-icon>
+                } @else {
+                  <mat-icon> delete </mat-icon>
+                }
+
+                <p>
+                  {{ order.quantity }}
+                </p>
+
+                <mat-icon> add </mat-icon>
+              </div>
+            </div>
+          </div>
+        }
+      }
+    }
+
+    <div class="py-2">
+      <div class="flex justify-between text-sm font-semibold">
+        <p>Products cost:</p>
+        <p>
+          {{ cart.total | currency: symbol ?? '' }}
+        </p>
+      </div>
+      @if (roomService?.cost) {
+        <div class="flex justify-between text-sm font-semibold mt-2">
+          <p>Shipping cost:</p>
+          <p>
+            {{ roomService?.cost | currency: symbol ?? '' }}
+          </p>
+        </div>
+      }
+
+      <div class="flex justify-between text-sm font-semibold mt-2">
+        <p>Total:</p>
+        <p>
+          {{ cart.total + (roomService?.cost || 0) | currency: symbol ?? '' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <p class="font-semibold">Where do you want to receive it</p>
+    <div class="mt-2">
+      <ctr-box-field label="Room" (action)="openZoneBottomSheet()">
+        <ng-container icon>location_on</ng-container>
+      </ctr-box-field>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <p>Time of delivery</p>
+    <ctr-box-field
+      (action)="openTimeBottomSheet()"
+      label="As soon as possible"
+      description="It will take us at least 64 minutes"
+    >
+      <ng-container icon>schedule</ng-container>
+    </ctr-box-field>
+  </div>
+
+  <div class="mt-5">
+    <ctr-box-field label="Payment method" description="Charge to the room">
+      <ng-container icon>schedule</ng-container>
+    </ctr-box-field>
+  </div>
+</div>

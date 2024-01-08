@@ -1,0 +1,22 @@
+<ctr-modal-container title="Select an estimated time">
+  <ng-container body>
+    <div class="px-4">
+      <ctr-select-option
+        [selected]="timeOfDelivery.option === 0"
+        label="As soon as possible"
+        subtitle="It will take us at least 64 minutes"
+      ></ctr-select-option>
+
+      <div class="mt-2">
+        <ctr-select-option
+          (action)="openPicker()"
+          [selected]="timeOfDelivery.option === 1"
+          label="Specific time"
+        ></ctr-select-option>
+      </div>
+    </div>
+  </ng-container>
+</ctr-modal-container>
+
+<input #input [ngxTimepicker]="picker" class="hidden" />
+<ngx-material-timepicker #picker></ngx-material-timepicker>

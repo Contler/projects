@@ -16,3 +16,9 @@ export * from './directives/text-hotel-color.directive';
 export * from './directives/radio-button.directive';
 export * from './directives/color-checkbox.directive';
 export * from './components/counter/counter.component';
+
+export * from './components/box-field/box-field.component';
+
+export * from './components/navbar/navbar.component';
+
+export * from './components/select-option/select-option.component';
