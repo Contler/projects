@@ -1,0 +1,9 @@
+<div class="flex items-center justify-center rounded-full min-w-[150px] shadow bg-white">
+  <button (click)="reduce()" [disabled]="value() === 0" mat-icon-button type="button">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <span class="flex-1 text-center">{{ value() }}</span>
+  <button (click)="increase()" mat-icon-button type="button">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

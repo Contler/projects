@@ -15,3 +15,4 @@ export * from './components/modal-container/modal-container.component';
 export * from './directives/text-hotel-color.directive';
 export * from './directives/radio-button.directive';
 export * from './directives/color-checkbox.directive';
+export * from './components/counter/counter.component';

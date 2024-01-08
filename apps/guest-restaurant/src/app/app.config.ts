@@ -10,6 +10,8 @@ import { provideRouter } from '@angular/router';
 import { CONFIG_FEATURE_KEY, ConfigEffects, reducer } from '@contler/configState';
 import { HotelEffects, hotelFeature } from '@contler/core/hotel';
 import {
+  CART_FEATURE_KEY,
+  cartReducer,
   CategoriesEffects,
   RESTAURANT_FEATURE_KEY,
   RestaurantEffects,
@@ -35,6 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState({ name: RESTAURANT_FEATURE_KEY, reducer: restaurantReducer }),
     provideState({ name: CONFIG_FEATURE_KEY, reducer: reducer }),
+    provideState({ name: CART_FEATURE_KEY, reducer: cartReducer }),
     provideState({ name: hotelFeature.name, reducer: hotelFeature.reducer }),
     provideEffects([RestaurantEffects, ConfigEffects, HotelEffects, CategoriesEffects]),
     provideStoreDevtools({ logOnly: !isDevMode() }),
