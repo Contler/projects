@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatInputModule } from '@angular/material/input';
 import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
 import { hotelFeature } from '@contler/core/hotel';
-import { ProductModel } from '@contler/core/restaurants';
+import { addItemToCart, CartModel, ProductModel, selectEntity } from '@contler/core/restaurants';
 import {
   DynamicFormComponent,
   DynamicFormService,
@@ -15,7 +15,7 @@ import {
   RadioInputComponent,
   TextInputComponent,
 } from '@contler/dynamic-form';
-import { ButtonComponent, HotelColorDirective, ModalContainerComponent } from '@contler/ui';
+import { ButtonComponent, CounterComponent, HotelColorDirective, ModalContainerComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter, first } from 'rxjs';
@@ -37,6 +37,7 @@ import { filter, first } from 'rxjs';
     MultiSelectWithQuantitiesComponent,
     MultiSelectComponent,
     DynamicFormComponent,
+    CounterComponent,
   ],
   templateUrl: './product-modal.component.html',
   styleUrl: './product-modal.component.scss',
@@ -57,6 +58,7 @@ export class ProductModalComponent implements OnInit {
     this.formGroup = formBuild.group({
       comments: [''],
       dynamicForm: [],
+      quantity: [1, Validators.min(1)],
     });
 
     this.store
@@ -83,6 +85,23 @@ export class ProductModalComponent implements OnInit {
   }
 
   addProduct() {
-    console.log(this.formGroup.value);
+    this.store
+      .select(selectEntity)
+      .pipe(first())
+      .subscribe((restaurant) => {
+        if (restaurant) {
+          const { comments, dynamicForm, quantity } = this.formGroup.value;
+          const cartItem: CartModel = {
+            id: Date.now(),
+            restaurant: restaurant,
+            product: this.data,
+            form: this.form ? ({ ...this.form, form: dynamicForm } as FormModel) : undefined,
+            comments,
+            quantity,
+          };
+          this.store.dispatch(addItemToCart({ item: cartItem }));
+          this._bottomSheetRef.dismiss();
+        }
+      });
   }
 }
