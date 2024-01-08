@@ -1,4 +1,4 @@
-import { RestaurantModel } from './restaurant.model';
+import { RestaurantDto } from '../dto';
 
 export interface ProductModel {
   id: number;
@@ -10,5 +10,5 @@ export interface ProductModel {
   image?: string;
   formId: string;
   position: number | null;
-  restaurant?: Pick<RestaurantModel, 'name' | 'image' | 'uid'>;
+  restaurant?: RestaurantDto;
 }

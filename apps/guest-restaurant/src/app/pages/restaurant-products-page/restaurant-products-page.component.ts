@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
 import {
   CategoryDto,
@@ -16,6 +16,7 @@ import {
   selectSelectedCategoryId,
 } from '@contler/core/restaurants';
 import {
+  ButtonComponent,
   CapitalizePipe,
   ChipComponent,
   HeaderComponent,
@@ -52,6 +53,8 @@ import { ProductsCategoryComponent } from './components/products-category/produc
     CdkScrollable,
     ScrollComponent,
     ScrollItemComponent,
+    ButtonComponent,
+    RouterModule
   ],
   templateUrl: './restaurant-products-page.component.html',
   styleUrl: './restaurant-products-page.component.scss',

@@ -6,7 +6,14 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
 import { RoomService, hotelFeature } from '@contler/core/hotel';
-import { Cart, TimeOfDelivery, cartMock } from '@contler/core/restaurants';
+import {
+  CartModel,
+  RestaurantDto,
+  TimeOfDelivery,
+  selectAllCart,
+  selectCartItemsByRestaurant,
+  selectTotal,
+} from '@contler/core/restaurants';
 import { BoxFieldComponent, NavbarComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { filter, first } from 'rxjs';
@@ -31,7 +38,9 @@ import { ZoneModalComponent } from './components/zone-modal/zone-modal.component
   styleUrl: './checkout-page.component.scss',
 })
 export class CheckoutPageComponent {
-  cart: Cart = cartMock;
+  cart: CartModel[] = [];
+  total: number = 0;
+  cartItemsByRestaurant: { restaurant: RestaurantDto; items: CartModel[] }[] = [];
   symbol: string | undefined;
   roomService: RoomService | undefined;
   expandedRestaurants: string[] = [];
@@ -44,6 +53,17 @@ export class CheckoutPageComponent {
     private store: Store,
     private matBottomSheet: MatBottomSheet,
   ) {
+    this.store.select(selectAllCart).subscribe((cart) => {
+      this.cart = cart;
+    });
+    this.store.select(selectTotal).subscribe((total) => {
+      this.total = total;
+    });
+    this.store.select(selectCartItemsByRestaurant).subscribe((cartItemsByRestaurant) => {
+      this.cartItemsByRestaurant = cartItemsByRestaurant;
+      console.log(cartItemsByRestaurant);
+      
+    });
     this.store
       .select(hotelFeature.selectHotelConfig)
       .pipe(
