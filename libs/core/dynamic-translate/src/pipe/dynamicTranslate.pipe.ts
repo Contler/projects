@@ -3,7 +3,7 @@ import { Database, get, ref } from '@angular/fire/database';
 import { hotelFeature } from '@contler/core/hotel';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, first, from, Observable, of, switchMap, tap } from 'rxjs';
+import { filter, first, from, Observable, of, switchMap } from 'rxjs';
 
 import { getFireLoc } from '../utils/get-language';
 
@@ -23,21 +23,7 @@ export class DynamicTranslatePipe implements PipeTransform {
       return of('');
     }
 
-    const dic = localStorage['dynamicTranslate'];
-    if (dic) {
-      const dicObj = JSON.parse(dic);
-      if (dicObj[value]) {
-        return of(dicObj[value]);
-      }
-    }
-
-    return this.getTranslation(value).pipe(
-      tap((res) => {
-        const dic = localStorage['dynamicTranslate'] ? JSON.parse(localStorage['dynamicTranslate']) : {};
-        dic[value] = res;
-        localStorage['dynamicTranslate'] = JSON.stringify(dic);
-      }),
-    );
+    return this.getTranslation(value).pipe();
   }
 
   private getTranslation(key: string): Observable<string> {
@@ -47,7 +33,7 @@ export class DynamicTranslatePipe implements PipeTransform {
       switchMap((hotel) => {
         const lang = getFireLoc(this.translate.currentLang);
         const refT = ref(this.db, `dictionary/${hotel!.uid}/${key}/${lang}`);
-        return from(get(refT).then((snap) => snap.val() || ''));
+        return from(get(refT).then((snap) => snap.val() || key));
       }),
     );
   }

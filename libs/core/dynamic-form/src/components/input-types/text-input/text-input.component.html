@@ -1,0 +1,16 @@
+@if (inputField) {
+  <div class="mt-2 mb-3 px-4">
+    <p class="font-semibold text-base">{{ inputField.description | dynamicTranslate | async | capitalize }}</p>
+  </div>
+  <div class="px-4">
+    <mat-form-field appearance="outline" class="w-full ng-invalid mat-form-field-invalid ng-touched">
+      <textarea
+        (blur)="onTouch?.()"
+        [(ngModel)]="inputField.value"
+        (ngModelChange)="updateValue()"
+        matInput
+        [errorStateMatcher]="errorMatcher"
+      ></textarea>
+    </mat-form-field>
+  </div>
+}

@@ -13,3 +13,5 @@ export * from './components/scroll/scroll.component';
 export * from './components/scroll/components/scroll-item.component';
 export * from './components/modal-container/modal-container.component';
 export * from './directives/text-hotel-color.directive';
+export * from './directives/radio-button.directive';
+export * from './directives/color-checkbox.directive';
