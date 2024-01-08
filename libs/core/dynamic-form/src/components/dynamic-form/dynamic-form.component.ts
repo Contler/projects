@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -12,15 +11,14 @@ import {
   Validator,
 } from '@angular/forms';
 
-import { InputField } from '../../models/input-field';
-import { InputType } from '../../models/input-type';
+import { InputField, InputType } from '../../models';
 import { MultiSelectComponent } from '../input-types/multi-select/multi-select.component';
 import { MultiSelectWithQuantitiesComponent } from '../input-types/multi-select-with-quantities/multi-select-with-quantities.component';
 import { RadioInputComponent } from '../input-types/radio-input/radio-input.component';
 import { TextInputComponent } from '../input-types/text-input/text-input.component';
 
 @Component({
-  selector: 'contler-dynamic-form',
+  selector: 'ctr-dynamic-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -55,43 +53,18 @@ export class DynamicFormComponent implements OnChanges, ControlValueAccessor, Va
   ngOnChanges(): void {
     this.inputFieldList.forEach((inputField, index) => {
       const key = `inp-field-${index}`;
-      this.form.addControl(key, new FormControl(inputField.value));
+      this.form.addControl(key, new FormControl(inputField));
     });
     this.form.valueChanges.subscribe((value) => {
       const values = this.inputFieldList.map((inputField, index) => {
-        return {
-          ...inputField,
-          value: value[`inp-field-${index}`],
-        };
+        return value[`inp-field-${index}`];
       });
       this.onChange(values);
     });
   }
 
-  validate(control: AbstractControl): ValidationErrors | null {
-    const errors: (ValidationErrors | null)[] = control.value?.map((inputField: InputField) => {
-      if (inputField.required === true || inputField.required === null) {
-        if (inputField.value === null) return { required: true };
-        switch (inputField.type) {
-          case InputType.MULTI_SELECT:
-            return Object.values(inputField.value as object).some((value) => value === true)
-              ? null
-              : { required: true };
-          case InputType.MULTISELECT_WITH_QUANTITY:
-            return Object.values(inputField.value as object).some((value) => value > 0) ? null : { required: true };
-          default:
-            return inputField.value ? null : { required: true };
-        }
-      } else {
-        return null;
-      }
-    });
-
-    if (errors === null) {
-      return { required: true };
-    }
-
-    return errors?.filter((error) => error !== null).length > 0 ? { required: true } : null;
+  validate(): ValidationErrors | null {
+    return this.form.invalid ? { invalid: true } : null;
   }
 
   writeValue(obj: unknown): void {

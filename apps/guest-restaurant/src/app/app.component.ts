@@ -3,7 +3,7 @@ import { Auth, user, User } from '@angular/fire/auth';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { loadUser } from '@contler/configState';
-import { loadHotel, loadHotelByUser } from '@contler/core/hotel';
+import { hotelFeature, loadHotel, loadHotelByUser } from '@contler/core/hotel';
 import { ButtonComponent, SpinnerHotelDirective, StrokedButtonComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
@@ -44,6 +44,14 @@ export class AppComponent implements OnInit {
       .subscribe((user) => {
         this.store.dispatch(loadUser({ id: user.uid }));
         this.store.dispatch(loadHotelByUser({ userUid: user.uid }));
+      });
+
+    this.store
+      .select(hotelFeature.selectHotel)
+      .pipe(filter((hotel) => !!hotel))
+      .subscribe((hotel) => {
+        document.body.style.setProperty('--mdc-outlined-text-field-focus-outline-color', hotel?.color || '#000');
+        document.body.style.setProperty('--mat-radio-checked-ripple-color', hotel?.color || '#000');
       });
   }
 

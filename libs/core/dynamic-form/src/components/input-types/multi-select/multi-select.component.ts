@@ -1,15 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { Component, forwardRef, OnChanges, OnDestroy } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ColorCheckboxDirective } from '@contler/ui';
-import { Subject, takeUntil } from 'rxjs';
+import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
+import { CapitalizePipe, ColorCheckboxDirective } from '@contler/ui';
+import { Subscription } from 'rxjs';
 
-import { InputField } from '../../../models/input-field';
+import { InputField } from '../../../models';
+
 @Component({
-  selector: 'contler-multi-select',
+  selector: 'ctr-multi-select',
   standalone: true,
   imports: [
     CommonModule,
@@ -18,6 +28,8 @@ import { InputField } from '../../../models/input-field';
     MatCheckboxModule,
     ColorCheckboxDirective,
     MatRippleModule,
+    DynamicTranslatePipe,
+    CapitalizePipe,
   ],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
@@ -27,20 +39,48 @@ import { InputField } from '../../../models/input-field';
       useExisting: forwardRef(() => MultiSelectComponent),
       multi: true,
     },
+    { provide: NG_VALIDATORS, useExisting: MultiSelectComponent, multi: true },
   ],
 })
-export class MultiSelectComponent implements ControlValueAccessor, OnChanges {
-  @Input() inputField?: InputField;
-  onChange?: (data: { [key: string]: boolean }) => void;
+export class MultiSelectComponent implements ControlValueAccessor, OnChanges, OnDestroy {
+  inputField: InputField | undefined;
+  onChange?: (data: InputField) => void;
   onTouch?: () => void;
   group = new FormGroup({});
-  unsubscribe$ = new Subject<void>();
+  private subscribe: Subscription;
 
-  constructor() {}
+  constructor() {
+    this.subscribe = this.group.valueChanges.subscribe((values: { [key: string]: boolean }) => {
+      if (this.inputField) {
+        const tempo = {} as { [key: string]: boolean };
+        Object.keys(values).forEach((key) => {
+          if (values[key]) {
+            tempo[key] = values[key];
+          }
+        });
+        this.inputField.value = tempo;
+        this.onChange?.({ ...this.inputField } as InputField);
+      }
+    });
+  }
 
-  writeValue(obj: { [key: string]: boolean }): void {
+  validate(): ValidationErrors | null {
+    if (this.inputField?.required) {
+      return this.inputField?.value && Object.keys(this.inputField.value).length ? null : { required: true };
+    }
+    return null;
+  }
+
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe();
+  }
+
+  writeValue(obj: InputField): void {
     if (obj) {
-      this.group.setValue(obj);
+      this.inputField = obj;
+      this.inputField?.option?.forEach((option) => {
+        this.group.addControl(option, new FormControl(false));
+      });
     }
   }
 
@@ -48,19 +88,13 @@ export class MultiSelectComponent implements ControlValueAccessor, OnChanges {
     this.inputField?.option?.forEach((option) => {
       this.group.addControl(option, new FormControl(false));
     });
-
-    this.group.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-      if (this.onChange) {
-        this.onChange!(value);
-      }
-    });
   }
 
   selectValue(value: string): void {
     this.group.get(value)?.setValue(!this.group.get(value)?.value);
   }
 
-  registerOnChange(fn: (data: { [key: string]: boolean }) => void): void {
+  registerOnChange(fn: (data: InputField) => void): void {
     this.onChange = fn;
   }
 

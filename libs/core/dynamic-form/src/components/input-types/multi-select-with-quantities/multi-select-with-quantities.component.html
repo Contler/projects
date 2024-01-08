@@ -1,14 +1,15 @@
 <div>
+  <p class="font-semibold mb-2 px-4">{{ inputField?.description | dynamicTranslate | async | capitalize }}</p>
   <div class="bg-neutral-100 px-4" *ngFor="let op of inputField?.option; let i = index; let last = last">
     <div class="flex justify-between items-center py-4">
       <div>
         <p class="font-semibold text-sm">
-          {{ op }}
+          {{ op | dynamicTranslate | async }}
         </p>
       </div>
 
       <div class="rounded-xl border border-neutral-400 bg-white flex gap-x-2 items-center h-[28px] px-2">
-        <mat-icon class="text-lg !w-fit !h-fit" (click)="removeQuantity(op)"> remove </mat-icon>
+        <mat-icon ctrHotelColor class="text-lg !w-fit !h-fit" (click)="removeQuantity(op)"> remove </mat-icon>
 
         <span class="text-sm"> {{ optionsMap[op] }} </span>
 

@@ -10,7 +10,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "contler",
+            "prefix": "ctr",
             "style": "camelCase"
           }
         ],
@@ -18,7 +18,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "contler",
+            "prefix": "ctr",
             "style": "kebab-case"
           }
         ]

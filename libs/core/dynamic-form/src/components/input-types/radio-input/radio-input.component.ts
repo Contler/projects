@@ -1,16 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnDestroy, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { Component, forwardRef } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
-import { RadioButtonDirective } from '@contler/ui';
-import { Subject, takeUntil } from 'rxjs';
+import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
+import { CapitalizePipe, RadioButtonDirective } from '@contler/ui';
 
-import { InputField } from '../../../models/input-field';
+import { InputField } from '../../../models';
 
 @Component({
-  selector: 'contler-radio-input',
+  selector: 'ctr-radio-input',
   standalone: true,
   imports: [
     CommonModule,
@@ -19,37 +26,31 @@ import { InputField } from '../../../models/input-field';
     ReactiveFormsModule,
     MatRippleModule,
     RadioButtonDirective,
+    DynamicTranslatePipe,
+    CapitalizePipe,
+    FormsModule,
   ],
   templateUrl: './radio-input.component.html',
   styleUrl: './radio-input.component.scss',
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => RadioInputComponent), multi: true }],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => RadioInputComponent), multi: true },
+    { provide: NG_VALIDATORS, useExisting: RadioInputComponent, multi: true },
+  ],
 })
-export class RadioInputComponent implements ControlValueAccessor, OnDestroy {
-  @Input() inputField?: InputField;
-  control = new FormControl();
-  unsubscribe$ = new Subject<void>();
+export class RadioInputComponent implements ControlValueAccessor {
+  inputField: InputField | undefined;
 
-  onChange?: (data: string) => void;
+  onChange?: (data: InputField) => void;
   onTouch?: () => void;
 
-  constructor() {
-    this.control.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-      if (this.onChange) {
-        this.onChange(value);
-      }
-    });
+  validate(): ValidationErrors | null {
+    if (this.inputField?.required) {
+      return this.inputField?.value ? null : { required: true };
+    }
+    return null;
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  selectValue(value: string): void {
-    this.control.setValue(value);
-  }
-
-  public registerOnChange(fn: (data: string) => void): void {
+  public registerOnChange(fn: (data: InputField) => void): void {
     this.onChange = fn;
   }
 
@@ -57,10 +58,22 @@ export class RadioInputComponent implements ControlValueAccessor, OnDestroy {
     this.onTouch = fn;
   }
 
-  writeValue(obj: string): void {
-    if (obj && this.inputField) {
-      this.inputField.value = obj;
-      this.control.setValue(obj);
+  writeValue(obj: InputField): void {
+    if (obj) {
+      this.inputField = obj;
+    }
+  }
+
+  changeValue() {
+    if (this.inputField) {
+      this.onChange?.({ ...(this.inputField as InputField) });
+    }
+  }
+
+  setValue(value: string) {
+    if (this.inputField) {
+      this.inputField.value = value;
+      this.onChange?.({ ...(this.inputField as InputField) });
     }
   }
 }
