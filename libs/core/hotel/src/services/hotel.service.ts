@@ -3,7 +3,7 @@ import { inject, Inject, Injectable } from '@angular/core';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { API_URL, AuthHttpHandleService } from '@contler/utils';
 
-import { HotelConfigModel, HotelModel } from '../models';
+import { HotelConfigModel, HotelModel, ZoneModel } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,12 @@ export class HotelService {
   getHotel(hotelUid: string) {
     const url = new URL(`/hotel/${hotelUid}`, this.apiUrl);
     return this.http.get<HotelModel>(url.toString());
+  }
+
+  getHotelZones(hotelUid: string) {
+    const url = new URL(`/hotel/${hotelUid}/zone`, this.apiUrl);
+
+    return this.http.get<ZoneModel[]>(url.toString());
   }
 
   async getConfigHotel(hotelUid: string) {

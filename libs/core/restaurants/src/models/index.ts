@@ -6,3 +6,4 @@ export * from './product-order.model';
 export * from './cart.model';
 export * from './zone.model';
 export * from './time-of-delivery.model';
+export * from './payment-method.model';

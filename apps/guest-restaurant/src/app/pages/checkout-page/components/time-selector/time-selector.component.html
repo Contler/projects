@@ -1,0 +1,7 @@
+<div class="p-3">
+  <ion-datetime presentation="time" [(ngModel)]="time"></ion-datetime>
+
+  <div class="flex justify-end">
+    <button ctrButton (click)="close()" [disabled]="!time">Aceptar</button>
+  </div>
+</div>

@@ -1,9 +1,13 @@
 <ctr-navbar></ctr-navbar>
 <div class="px-4 py-5">
   <div class="mb-3">
-    <p class="text-xl font-semibold">Confirm your order</p>
+    <p class="text-xl font-semibold">
+      {{ 'product.confirmOrder' | translate }}
+    </p>
   </div>
-  <p class="text-base font-semibold">Products</p>
+  <p class="text-base font-semibold">
+    {{ 'checkout.products' | translate }}
+  </p>
 
   <div class="border rounded-xl p-2">
     @for (cartItemByRestaurant of cartItemsByRestaurant; track cartItemByRestaurant.restaurant.uid) {
@@ -32,7 +36,7 @@
         @for (order of cartItemByRestaurant.items; track order.id) {
           <div class="border-b border-neutral-200 py-2 px-1">
             <div class="flex gap-x-5">
-              <img [src]="order.product.image" class="w-[50px] h-[50px] rounded-xl" alt="" />
+              <img [src]="order.product.image" class="w-[50px] h-[50px] rounded-xl object-cover" alt="" />
               <div>
                 <p class="text-sm font-semibold">
                   {{ order.product.name | dynamicTranslate | async }}
@@ -68,14 +72,18 @@
 
     <div class="py-2">
       <div class="flex justify-between text-sm font-semibold">
-        <p>Products cost:</p>
+        <p>
+          {{ 'checkout.productCost' | translate }}
+        </p>
         <p>
           {{ total | currency: symbol ?? '' }}
         </p>
       </div>
       @if (roomService?.cost) {
         <div class="flex justify-between text-sm font-semibold mt-2">
-          <p>Shipping cost:</p>
+          <p>
+            {{ 'checkout.shippingCost' | translate }}
+          </p>
           <p>
             {{ roomService?.cost | currency: symbol ?? '' }}
           </p>
@@ -83,7 +91,9 @@
       }
 
       <div class="flex justify-between text-sm font-semibold mt-2">
-        <p>Total:</p>
+        <p>
+          {{ 'checkout.total' | translate }}
+        </p>
         <p>
           {{ total + (roomService?.cost || 0) | currency: symbol ?? '' }}
         </p>
@@ -92,27 +102,43 @@
   </div>
 
   <div class="mt-5">
-    <p class="font-semibold">Where do you want to receive it</p>
+    <p class="font-semibold">
+      {{ 'checkout.placeDelivery' | translate }}
+    </p>
     <div class="mt-2">
-      <ctr-box-field label="Room" (action)="openZoneBottomSheet()">
+      <ctr-box-field [label]="'room' | translate" (action)="openZoneBottomSheet()">
         <ng-container icon>location_on</ng-container>
       </ctr-box-field>
     </div>
   </div>
 
   <div class="mt-5">
-    <p>Time of delivery</p>
-    <ctr-box-field
-      (action)="openTimeBottomSheet()"
-      label="As soon as possible"
-      description="It will take us at least 64 minutes"
-    >
-      <ng-container icon>schedule</ng-container>
-    </ctr-box-field>
+    <p class="font-semibold">
+      {{ 'checkout.timeDelivery' | translate }}
+    </p>
+    <div class="mt-2">
+      <ctr-box-field
+        (action)="openTimeBottomSheet()"
+        [label]="'checkout.asap' | translate"
+        [description]="
+          ('checkout.timeDescription' | translate) +
+          ' ' +
+          (roomService?.estimatedTime || '60') +
+          ' ' +
+          ('checkout.minutes' | translate)
+        "
+      >
+        <ng-container icon>schedule</ng-container>
+      </ctr-box-field>
+    </div>
   </div>
 
   <div class="mt-5">
-    <ctr-box-field label="Payment method" description="Charge to the room">
+    <ctr-box-field
+      [label]="'checkout.payment' | translate"
+      [description]="paymentMethod | translate"
+      (action)="openPaymentBottomSheet()"
+    >
       <ng-container icon>schedule</ng-container>
     </ctr-box-field>
   </div>

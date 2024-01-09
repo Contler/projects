@@ -2,21 +2,26 @@
   <ng-container body>
     <div class="px-4">
       <ctr-select-option
-        [selected]="timeOfDelivery.option === 0"
-        label="As soon as possible"
-        subtitle="It will take us at least 64 minutes"
+        [selected]="selectedOption === 0"
+        [label]="'checkout.asap' | translate"
+        [subtitle]="
+          ('checkout.timeDescription' | translate) +
+          ' ' +
+          (roomService?.estimatedTime || '60') +
+          ' ' +
+          ('checkout.minutes' | translate)
+        "
+        (action)="setAsSoonAsPossible()"
       ></ctr-select-option>
 
       <div class="mt-2">
         <ctr-select-option
           (action)="openPicker()"
-          [selected]="timeOfDelivery.option === 1"
-          label="Specific time"
+          [selected]="selectedOption === 1"
+          [label]="'checkout.specificTime' | translate"
+          [subtitle]="selectedOption === 1 ? (time | date: 'hh:mm a') || '' : ''"
         ></ctr-select-option>
       </div>
     </div>
   </ng-container>
 </ctr-modal-container>
-
-<input #input [ngxTimepicker]="picker" class="hidden" />
-<ngx-material-timepicker #picker></ngx-material-timepicker>

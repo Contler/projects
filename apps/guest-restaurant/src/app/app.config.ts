@@ -19,6 +19,7 @@ import {
 } from '@contler/core/restaurants';
 import { SimpleLocalizeHttpLoaderService } from '@contler/translate';
 import { API_URL } from '@contler/utils';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -41,6 +42,8 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: hotelFeature.name, reducer: hotelFeature.reducer }),
     provideEffects([RestaurantEffects, ConfigEffects, HotelEffects, CategoriesEffects]),
     provideStoreDevtools({ logOnly: !isDevMode() }),
+    provideIonicAngular({ mode: 'ios' }),
+
     provideAnimations(),
     provideRouter(appRoutes),
     provideHttpClient(),

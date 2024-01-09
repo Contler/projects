@@ -1,0 +1,13 @@
+<ctr-modal-container [title]="'checkout.paymentOption' | translate">
+  <ng-container body>
+    <div class="px-4">
+      @for (payment of paymentOptions; track payment) {
+        <ctr-select-option
+          [label]="payment | translate"
+          [selected]="payment === selectedPayment"
+          (action)="selectPayment(payment)"
+        ></ctr-select-option>
+      }
+    </div>
+  </ng-container>
+</ctr-modal-container>

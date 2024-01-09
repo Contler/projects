@@ -1,8 +1,12 @@
-<ctr-modal-container title="Where do you want to receive it">
+<ctr-modal-container [title]="'checkout.placeDelivery' | translate">
   <ng-container body>
     <div class="px-4">
-      @for (zone of data.zones; track zone.uid) {
-        <ctr-select-option [label]="zone.name" [selected]="zone.uid === data?.selectedZone?.uid"></ctr-select-option>
+      @for (zone of zones; track zone.uid) {
+        <ctr-select-option
+          [label]="zone.name | dynamicTranslate | async"
+          [selected]="zone.uid === data?.selectedZone?.uid"
+          (action)="selectZone(zone)"
+        ></ctr-select-option>
       }
     </div>
   </ng-container>

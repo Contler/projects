@@ -5,9 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
-import { RoomService, hotelFeature } from '@contler/core/hotel';
+import { RoomService, ZoneModel, hotelFeature } from '@contler/core/hotel';
 import {
   CartModel,
+  PaymentMethod,
   RestaurantDto,
   TimeOfDelivery,
   selectAllCart,
@@ -15,11 +16,15 @@ import {
   selectTotal,
 } from '@contler/core/restaurants';
 import { BoxFieldComponent, NavbarComponent } from '@contler/ui';
+import { IonDatetime } from '@ionic/angular/standalone';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { filter, first } from 'rxjs';
 
+import { PaymentMethodComponent } from './components/payment-method/payment-method.component';
 import { TimeOfDeliveryComponent } from './components/time-of-delivery/time-of-delivery.component';
 import { ZoneModalComponent } from './components/zone-modal/zone-modal.component';
+
 
 @Component({
   selector: 'contler-checkout-page',
@@ -33,13 +38,17 @@ import { ZoneModalComponent } from './components/zone-modal/zone-modal.component
     MatRippleModule,
     MatButtonModule,
     MatBottomSheetModule,
+    IonDatetime,
+    TranslateModule,
   ],
   templateUrl: './checkout-page.component.html',
   styleUrl: './checkout-page.component.scss',
 })
 export class CheckoutPageComponent {
   cart: CartModel[] = [];
+  paymentMethod: PaymentMethod = PaymentMethod.chargeToTheRoom;
   total: number = 0;
+  selectedZone: ZoneModel | undefined;
   cartItemsByRestaurant: { restaurant: RestaurantDto; items: CartModel[] }[] = [];
   symbol: string | undefined;
   roomService: RoomService | undefined;
@@ -62,7 +71,6 @@ export class CheckoutPageComponent {
     this.store.select(selectCartItemsByRestaurant).subscribe((cartItemsByRestaurant) => {
       this.cartItemsByRestaurant = cartItemsByRestaurant;
       console.log(cartItemsByRestaurant);
-      
     });
     this.store
       .select(hotelFeature.selectHotelConfig)
@@ -89,26 +97,30 @@ export class CheckoutPageComponent {
   }
 
   openZoneBottomSheet() {
-    this.matBottomSheet.open(ZoneModalComponent, {
-      data: {
-        zones: [
-          {
-            name: 'Room',
-            uid: 'room',
-          },
-        ],
-        selectedZone: {
-          name: 'Room',
-          uid: 'room',
+    this.matBottomSheet
+      .open(ZoneModalComponent, {
+        panelClass: 'bottom-sheet-container',
+        data: {
+          selectedZone: this.selectedZone,
         },
-      },
-      panelClass: 'bottom-sheet-container',
-    });
+      })
+      .afterDismissed()
+      .subscribe((zone) => {
+        if (zone) {
+          this.selectedZone = zone;
+        }
+      });
   }
 
   openTimeBottomSheet() {
     this.matBottomSheet.open(TimeOfDeliveryComponent, {
       data: this.timeOfDelivery,
+      panelClass: 'bottom-sheet-container',
+    });
+  }
+
+  openPaymentBottomSheet() {
+    this.matBottomSheet.open(PaymentMethodComponent, {
       panelClass: 'bottom-sheet-container',
     });
   }

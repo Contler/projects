@@ -15,7 +15,7 @@ import { filter, first } from 'rxjs';
 })
 export class SelectOptionComponent {
   @Input() selected: boolean = false;
-  @Input() label: string = '';
+  @Input() label: string | undefined | null = '';
   @Input() subtitle: string = '';
   @Output() action: EventEmitter<void> = new EventEmitter<void>();
   hotelColor: string | undefined;
