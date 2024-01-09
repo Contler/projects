@@ -8,7 +8,6 @@ import { TimeOfDelivery } from '@contler/core/restaurants';
 import { ModalContainerComponent, SelectOptionComponent } from '@contler/ui';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { filter, first } from 'rxjs';
 
 import { TimeSelectorComponent } from '../time-selector/time-selector.component';
@@ -16,7 +15,7 @@ import { TimeSelectorComponent } from '../time-selector/time-selector.component'
 @Component({
   selector: 'contler-time-of-delivery',
   standalone: true,
-  imports: [CommonModule, ModalContainerComponent, SelectOptionComponent, NgxMaterialTimepickerModule, TranslateModule],
+  imports: [CommonModule, ModalContainerComponent, SelectOptionComponent, TranslateModule],
   templateUrl: './time-of-delivery.component.html',
   styleUrl: './time-of-delivery.component.scss',
 })
