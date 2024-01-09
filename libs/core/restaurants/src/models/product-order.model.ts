@@ -9,4 +9,3 @@ export interface ProductOrderModel {
   coupon?: string;
   discount?: number;
 }
-

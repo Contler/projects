@@ -26,7 +26,6 @@ import { PaymentMethodComponent } from './components/payment-method/payment-meth
 import { TimeOfDeliveryComponent } from './components/time-of-delivery/time-of-delivery.component';
 import { ZoneModalComponent } from './components/zone-modal/zone-modal.component';
 
-
 @Component({
   selector: 'contler-checkout-page',
   standalone: true,

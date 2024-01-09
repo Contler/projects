@@ -29,6 +29,6 @@ export const SimpleSelectOption: Story = {
   args: {
     label: 'As soon as possible',
     selected: false,
-    subtitle: 'It will take us at least 60 minutes'
+    subtitle: 'It will take us at least 60 minutes',
   },
 };

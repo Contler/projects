@@ -54,7 +54,7 @@ import { ProductsCategoryComponent } from './components/products-category/produc
     ScrollComponent,
     ScrollItemComponent,
     ButtonComponent,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './restaurant-products-page.component.html',
   styleUrl: './restaurant-products-page.component.scss',
