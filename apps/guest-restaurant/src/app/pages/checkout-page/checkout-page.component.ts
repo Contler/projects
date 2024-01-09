@@ -4,6 +4,7 @@ import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-s
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterModule } from '@angular/router';
 import { DynamicTranslatePipe } from '@contler/core/dynamicTranslate';
 import { RoomService, ZoneModel, hotelFeature } from '@contler/core/hotel';
 import {
@@ -40,6 +41,7 @@ import { ZoneModalComponent } from './components/zone-modal/zone-modal.component
     MatBottomSheetModule,
     IonDatetime,
     TranslateModule,
+    RouterModule,
   ],
   templateUrl: './checkout-page.component.html',
   styleUrl: './checkout-page.component.scss',
@@ -61,9 +63,13 @@ export class CheckoutPageComponent {
   constructor(
     private store: Store,
     private matBottomSheet: MatBottomSheet,
+    private router: Router,
   ) {
     this.store.select(selectAllCart).subscribe((cart) => {
       this.cart = cart;
+      if (cart.length === 0) {
+        this.router.navigate(['/']);
+      }
     });
     this.store.select(selectTotal).subscribe((total) => {
       this.total = total;
